@@ -12,7 +12,6 @@ router.get('/:user_id', (req, res) => {
 		[user_id],
 		(err, results) => {
 			if (err) return res.status(500).json({error: err.message});
-			if (results.length == 0) return res.status(404).json({error: 'no reviews found'});
 			res.json(results);
 		}
 	)
