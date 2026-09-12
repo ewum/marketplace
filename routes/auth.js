@@ -12,7 +12,7 @@ router.post('/register', (req, res) => {
     bcrypt.hash(password, 10, (err, hash) => {
         if (err) return res.status(500).json({error: err.message});
         db.query(
-            'INSERT INTO users (name, email, password_hash VALUES (?, ?, ?)',
+            'INSERT INTO users(name, email, password_hash) VALUES (?, ?, ?)',
             [name, email, hash],
             (err, result) => {
                 if (err) return res.status(500).json({error: err.message});
