@@ -35,7 +35,7 @@ CREATE TABLE product_questions (
     question TEXT NOT NULL,
     answer TEXT,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP(),
-    answered_at TIMESTAMP,
+    answered_at TIMESTAMP DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(),
     FOREIGN KEY (asker_id) REFERENCES users(id),
     FOREIGN KEY (product_id) REFERENCES products(id)
 );
