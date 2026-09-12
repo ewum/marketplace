@@ -30,7 +30,7 @@ router.get('/:order_id', authMiddleware, (req, res) => {
 			if (results.length == 0) return res.status(404).json({error: 'no sale found'});
 			res.json(results[0]);
 		}
-		)
+	)
 })
 
 router.post('/:order_id/cancel', authMiddleware, (req, res) => {
@@ -45,7 +45,7 @@ router.post('/:order_id/cancel', authMiddleware, (req, res) => {
 			if (err) return res.status(500).json({error: err.message});
 			if (results.length == 0) return res.status(404).json({'no sale found'});
 			if (results.affectedRows === 0) return res.status(400).json({error: 'order cannot be cancelled'});
-			res.json({message: 'order cancelled'});
+			res.json({message: 'sale cancelled successfully'});
 		}	
 	)
 })
