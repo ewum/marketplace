@@ -17,8 +17,8 @@ router.get('/:user_id', (req, res) => {
 	)
 })
 
-router.post('/:user_id/rate', authMiddleware, (req, res) => {
-	const {user_id} = req.params;
+router.post('/:seller_id/rate', authMiddleware, (req, res) => {
+	const {seller_id} = req.params;
 	db.query(
 		`INSERT INTO user_reviews (seller_id, buyer_id, rating, comment)
 		VALUES (?, ?, ?, ?)
@@ -28,7 +28,7 @@ router.post('/:user_id/rate', authMiddleware, (req, res) => {
 			JOIN products p ON o.product_id = p.id
 			WHERE p.seller_id = ? AND o.buyer_id = ? AND o.status = 'delivered'
 		)`,
-		[user_id, req.user.id, req.body.rating, req.body.comment, user_id, req.user.id],
+		[seller_id, req.user.id, req.body.rating, req.body.comment, seller_id, req.user.id],
 		(err, results) => {
 			if (err) return res.status(500).json({error: err.message});
 			res.status(201).json({message: 'review posted successfully'});
