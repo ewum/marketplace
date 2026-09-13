@@ -13,7 +13,8 @@ services:
       - DB_NAME=mydb
       - JWT_SECRET=1234
     depends_on:
-      - db
+      db:
+        condition: service_healthy
 
   db:
     image: mysql:8
@@ -25,6 +26,12 @@ services:
     volumes:
       - db_data:/var/lib/mysql
       - ./database/init.sql:/docker-entrypoint-initdb.d/init.sql
+    healthcheck:
+      test: ["CMD-SHELL", "mysql -h 127.0.0.1 -uroot -p1234 -e 'USE mydb; SELECT 1;'"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+      start_period: 10s
 
 volumes:
   db_data:
