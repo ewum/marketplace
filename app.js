@@ -17,5 +17,5 @@ app.get('*', (req, res) => {
 });
 
 app.listen(3000, '0.0.0.0', () => {
-    console.log('Servidor rodando na porta 3000');
+    console.log('Server port 3000');
 });
