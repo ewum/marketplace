@@ -43,7 +43,7 @@ router.post('/:order_id/cancel', authMiddleware, (req, res) => {
 		['cancelled', order_id, req.user.id],
 		(err, results) => {
 			if (err) return res.status(500).json({error: err.message});
-			if (results.length == 0) return res.status(404).json({'no sale found'});
+			if (results.length == 0) return res.status(404).json({error: 'no sale found'});
 			if (results.affectedRows === 0) return res.status(400).json({error: 'order cannot be cancelled'});
 			res.json({message: 'sale cancelled successfully'});
 		}	

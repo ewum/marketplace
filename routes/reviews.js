@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const db = require('../db');
+const authMiddleware = require('../middlewares/authmiddleware');
 
 router.get('/:user_id', (req, res) => {
 	const {user_id} = req.params;
