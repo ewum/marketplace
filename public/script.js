@@ -26,7 +26,7 @@ function getAccountPage() {
 }
 
 async function loadProducts() {
-    const div = document.querySelector('#products');
+    const div = document.getElementById('products');
 
     try {
         const response = await fetch('/api/products');
