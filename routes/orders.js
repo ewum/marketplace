@@ -14,24 +14,24 @@ router.get('/', authMiddleware, (req, res) => {
             if (err) return res.status(500).json({error: err.message});
             res.json(results);
         }
-    )
-})
+    );
+});
 
 router.get('/:order_id', authMiddleware, (req, res) => {
     const {order_id} = req.params;
     db.query(
-            `SELECT p.name, seller.id, seller.name, o.quantity, o.total, o.status, o.shipping, o.created_at
-            FROM orders o
-            JOIN products p ON o.product_id = p.id
-            JOIN users seller ON p.seller_id = seller.id
-            WHERE o.id = ? AND o.buyer_id = ?`,
-            [order_id, req.user.id],
-            (err, results) => {
-                if (err) return res.status(500).json({error: err.message});
-                if (results.length == 0) return res.status(404).json({error: 'order not found'});
-                res.json(results);
-            }
-        )
-})
+        `SELECT p.name, seller.id, seller.name, o.quantity, o.total, o.status, o.shipping, o.created_at
+        FROM orders o
+        JOIN products p ON o.product_id = p.id
+        JOIN users seller ON p.seller_id = seller.id
+        WHERE o.id = ? AND o.buyer_id = ?`,
+        [order_id, req.user.id],
+        (err, results) => {
+            if (err) return res.status(500).json({error: err.message});
+            if (results.length == 0) return res.status(404).json({error: 'order not found'});
+            res.json(results);
+        }
+    );
+});
 
 module.exports = router

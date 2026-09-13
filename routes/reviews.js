@@ -14,8 +14,8 @@ router.get('/:user_id', (req, res) => {
 			if (err) return res.status(500).json({error: err.message});
 			res.json(results);
 		}
-	)
-})
+	);
+});
 
 router.post('/:seller_id/rate', authMiddleware, (req, res) => {
 	const {seller_id} = req.params;
@@ -33,7 +33,7 @@ router.post('/:seller_id/rate', authMiddleware, (req, res) => {
 			if (err) return res.status(500).json({error: err.message});
 			res.status(201).json({message: 'review posted successfully'});
 		}
-	)
-})
+	);
+});
 
 module.exports = router;

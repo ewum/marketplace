@@ -38,7 +38,7 @@ router.post('/login', (req, res ) => {
             );
             res.json({token});
         })
-    })
+    });
 });
 
 module.exports = router;

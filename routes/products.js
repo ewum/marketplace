@@ -11,13 +11,14 @@ router.get('/', (req, res) => {
 
 router.get('/:product_id', (req, res) => {
     const {product_id} = req.params;
-    db.query('SELECT * FROM products WHERE id = ?',
+    db.query(
+        'SELECT * FROM products WHERE id = ?',
         [product_id],
         (err, results) => {
             if (err) return res.status(500).json({error: err.message});
+            if (results.length == 0) return res.status(404).json({error: 'product not found'});
             res.json(results[0]);
-        }
-    })
-})
+    });
+});
 
 module.exports = router;
