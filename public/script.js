@@ -14,6 +14,10 @@ function getOrdersPage() {
     return `<h1>My orders</h1>`;
 }
 
+function getSalesPage() {
+    return `<h1>My Sales</h1>`;
+}
+
 function getAccountPage() {
     return `<h1>Manage account</h1>`;
 }
@@ -24,6 +28,7 @@ const routes = {
     '/sell': getSellPage,
     '/cart': getCartPage,
     '/orders': getOrdersPage,
+    '/sales': getSalesPage,
     '/account': getAccountPage
 };
 
