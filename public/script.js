@@ -49,6 +49,31 @@ async function loadProducts() {
     }
 }
 
+async function loadOrders() {
+    const div = document.getElementById('orders');
+
+    try {
+        const response = await fetch('/api/orders');
+
+        if (!response.ok) {
+            throw new Error('failed to laod orders');
+        }
+
+        const orders = await response.json();
+
+        div.innerHTML = orders.map(order => `
+            <div class='order'>
+                <h2>${order.name}</h2>
+                <p>Quantidade: ${order.quantity}</p>
+                <p>R$ ${order.price}
+            </div>
+        `);
+    } catch (error) {
+        console.error(error);
+        div.innerHTML = '<p>failed to load orders</p>'
+    }
+}
+
 const routes = {
     '/': {page: getBuyPage, init: loadProducts},
     '/buy': {page: getBuyPage, init: loadProducts},
