@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const authMiddleware = require('../middlewares/authmiddleware');
 const db = require('../db');
+const authMiddleware = require('../middlewares/authmiddleware');
 
 router.get('/:product_id', (req, res) => {
     const {product_id} = req.params;

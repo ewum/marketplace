@@ -1,5 +1,5 @@
 const express = require('express');
-const router = express.Rounter();
+const router = express.Router();
 const db = require('../db');
 
 router.get('/:user_id', (req, res) => {
