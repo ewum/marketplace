@@ -1,5 +1,8 @@
 function getBuyPage() {
-    return `<h1>Browse products</h1>`;
+    return `
+        <h1>Browse products</h1>
+        <div id='products'></div>
+    `;
 }
 
 function getSellPage() { 
@@ -22,20 +25,55 @@ function getAccountPage() {
     return `<h1>Manage account</h1>`;
 }
 
+async function loadProducts() {
+    const div = document.querySelector('#products');
+
+    try {
+        const response = await fetch('/api/products');
+
+        if (!response.ok) {
+            throw new Error('Failed to fetch products');
+        }
+        
+        const products = await response.json();
+
+        div.innerHTML = products.map(product => `
+            <div class='product'>
+                <h2>${product.name}</h2>
+                <p>R$ ${product.price}</p>
+            </div>
+        `).join('');
+    } catch (error) {
+        console.error(error);
+        div.innerHTML = '<p>failed to load products</p>'
+    }
+}
+
 const routes = {
-    '/': getBuyPage,
-    '/buy': getBuyPage,
-    '/sell': getSellPage,
-    '/cart': getCartPage,
-    '/orders': getOrdersPage,
-    '/sales': getSalesPage,
-    '/account': getAccountPage
+    '/': {page: getBuyPage, init: loadProducts},
+    '/buy': {page: getBuyPage, init: loadProducts},
+    '/sell': {page: getSellPage},
+    '/cart': {page: getCartPage},
+    '/orders': {page: getOrdersPage},
+    '/sales': {page: getSalesPage},
+    '/account': {page: getAccountPage}
 };
 
-function renderContent() {
+async function renderContent() {
     const div = document.getElementById('app');
     const path = window.location.pathname;
-    div.innerHTML = routes[path] ? routes[path]() : '<h1>Page not found</h1>';
+    const route = routes[path];
+
+    if (!route) {
+        div.innerHTML = '<h1>Page not found</h1>';
+        return;
+    }
+
+    div.innerHTML = route.page();
+
+    if (route.init) {
+        await route.init();
+    }
 }
 
 function navigate(path) {
