@@ -6,7 +6,7 @@ const authMiddleware = require('../middlewares/authmiddleware');
 router.get('/:product_id', (req, res) => {
     const {product_id} = req.params;
     db.query(
-        `SELECT q.*, asker.name AS asker
+        `SELECT q.*, asker.name AS asker_name, asker.id AS asker_id
         FROM product_questions q
         JOIN users asker ON q.asker_id = asker.id
         WHERE q.product_id = ?`,
