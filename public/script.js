@@ -76,6 +76,14 @@ async function loadProduct(id) {
             <p class='price'>${product.price}</p>
             <p class='stock'>${product.stock}</p>
             <p class='created_at'>${product.created_at}</p>
+            <h2 class='questions'>Perguntas</h2>
+            ${questions.map(question => `
+                <h2 class='asker'>${question.asker}</h2>
+                <p class='question'>${question.question}</p>
+                <p class='answer'>${question.answer}</p>
+                <p class='created_at'>${question.created_at}</p>
+                <p class='answered_at'>${question.answered_at}</p>
+            `)};
         `;
     }
 }
