@@ -74,8 +74,7 @@ async function loadProduct(id) {
             <p class='price'>${product.price}</p>
             <p class='stock'>${product.stock}</p>
             <p class='created_at'>${product.created_at}</p>
-            <p class='questions'>${product.}
-        `
+        `;
     }
 }
 
