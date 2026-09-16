@@ -49,6 +49,10 @@ async function loadProducts() {
     }
 }
 
+async function loadSingleProduct() {
+    
+}
+
 async function loadOrders() {
     const div = document.getElementById('orders');
 
@@ -77,17 +81,35 @@ async function loadOrders() {
 const routes = {
     '/': {page: getBuyPage, init: loadProducts},
     '/buy': {page: getBuyPage, init: loadProducts},
+    '/product/:id': {page: getProductPage, init: loadProduct},
     '/sell': {page: getSellPage},
     '/cart': {page: getCartPage},
     '/orders': {page: getOrdersPage},
+    '/orders/:id': {page: getOrderPage, init: loadOrder},
     '/sales': {page: getSalesPage},
     '/account': {page: getAccountPage}
 };
 
+function matchRoute(path) = {
+    for (const pattern in routes) {
+        const keys = [];
+        const regex = new RegExp('^' +
+        pattern.replace(/:([^/]+)/g, (_, key) => {
+            keys.push(key);
+            return '([^/]+)';
+        }) + '$');
+        const match = path.match(regex);
+        if (match) {
+            const params = {};
+            keys.forEach((key, i) => params[key] = match[i + 1]);
+            return {route: routes[pattern], params};
+        }
+    }
+}
+
 async function renderContent() {
     const div = document.getElementById('app');
-    const path = window.location.pathname;
-    const route = routes[path];
+    const {route, params} = matchRoute(window.location.pathname);
 
     if (!route) {
         div.innerHTML = '<h1>Page not found</h1>';
@@ -97,7 +119,7 @@ async function renderContent() {
     div.innerHTML = route.page();
 
     if (route.init) {
-        await route.init();
+        await route.init(params.id);
     }
 }
 
