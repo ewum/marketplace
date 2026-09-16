@@ -20,7 +20,7 @@ router.get('/', authMiddleware, (req, res) => {
 router.get('/:order_id', authMiddleware, (req, res) => {
     const {order_id} = req.params;
     db.query(
-        `SELECT p.name, seller.id, seller.name, o.quantity, o.total, o.status, o.shipping, o.created_at
+        `SELECT p.name AS product_name, seller.id AS seller_id, seller.name AS seller_name, o.quantity, o.total, o.status, o.shipping, o.created_at
         FROM orders o
         JOIN products p ON o.product_id = p.id
         JOIN users seller ON p.seller_id = seller.id
