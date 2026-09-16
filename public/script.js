@@ -13,23 +13,28 @@ function getBuyPage() {
 }
 
 function getSellPage() { 
-    return `<h1>Sell your stuff</h1>`;
+    return `<h1>Sell your stuff</h1>
+            <div id='sell'></div>`;
 }
 
 function getCartPage() {
-    return `<h1>Your cart</h1>`;
+    return `<h1>Your cart</h1>
+            <div id='cart'></div>`;
 }
 
 function getOrdersPage() {
-    return `<h1>My orders</h1>`;
+    return `<h1>My orders</h1>
+            <div id='orders'></div>`;
 }
 
 function getSalesPage() {
-    return `<h1>My Sales</h1>`;
+    return `<h1>My Sales</h1>
+            <div id='sales'></div>`;
 }
 
 function getAccountPage() {
-    return `<h1>Manage account</h1>`;
+    return `<h1>Manage account</h1>
+            <div id='account'></div>`;
 }
 
 async function loadProducts() {
@@ -80,7 +85,7 @@ async function loadProduct(id) {
             ${questions.map(question => `
                 <h2 class='asker'>${question.asker}</h2>
                 <p class='question'>${question.question}</p>
-                <p class='answer'>${question.answer}</p>
+                <p class='answer'>${question.answer} || 'sem resposta'</p>
                 <p class='created_at'>${question.created_at}</p>
                 <p class='answered_at'>${question.answered_at}</p>
             `)};
