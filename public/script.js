@@ -60,13 +60,15 @@ async function loadProduct(id) {
     const div = document.getElementById('product');
 
     try {
-        const response = await fetch('/api/products/:' + id);
+        const productRes = await fetch('/api/products/' + id);
+        const questionsRes = await fetch('/api/questions/' + id);
 
         if (!response.ok) {
             throw new Error('failed to fetch products');
         }
 
-        const product = await response.json();
+        const product = await productRes.json();
+        const questions = await questionRes.json();
 
         div.innerHTML = `
             <h2>${product.name}</h2>

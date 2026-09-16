@@ -6,7 +6,10 @@ const authMiddleware = require('../middlewares/authmiddleware');
 router.get('/:product_id', (req, res) => {
     const {product_id} = req.params;
     db.query(
-        'SELECT * FROM product_questions WHERE product_id = ?',
+        `SELECT q.*, asker.name AS asker
+        FROM product_questions q
+        JOIN users asker ON q.asker_id = asker.id
+        WHERE q.product_id = ?`,
         [product_id],
         (err, results) => {
             if (err) return res.status(500).json({error: err.message});
