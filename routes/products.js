@@ -12,7 +12,10 @@ router.get('/', (req, res) => {
 router.get('/:product_id', (req, res) => {
     const {product_id} = req.params;
     db.query(
-        'SELECT * FROM products WHERE id = ?',
+        `SELECT p.*, seller.name AS seller_name
+        FROM products p 
+        JOIN users seller ON p.seller_id = seller.id
+        WHERE id = ?`,
         [product_id],
         (err, results) => {
             if (err) return res.status(500).json({error: err.message});

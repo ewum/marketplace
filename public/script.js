@@ -5,6 +5,13 @@ function getBuyPage() {
     `;
 }
 
+;function getProductPage() {
+    return `
+        <h1>view product</h1>
+        <div id='product'></div>
+    `;
+}
+
 function getSellPage() { 
     return `<h1>Sell your stuff</h1>`;
 }
@@ -49,8 +56,27 @@ async function loadProducts() {
     }
 }
 
-async function loadSingleProduct() {
-    
+async function loadProduct(id) {
+    const div = document.getElementById('product');
+
+    try {
+        const response = await fetch('/api/products/:' + id);
+
+        if (!response.ok) {
+            throw new Error('failed to fetch products');
+        }
+
+        const product = await response.json();
+
+        div.innerHTML = `
+            <h2>${product.name}</h2>
+            <p class='description'>${product.description}</p>
+            <p class='price'>${product.price}</p>
+            <p class='stock'>${product.stock}</p>
+            <p class='created_at'>${product.created_at}</p>
+            <p class='questions'>${product.}
+        `
+    }
 }
 
 async function loadOrders() {
@@ -67,9 +93,9 @@ async function loadOrders() {
 
         div.innerHTML = orders.map(order => `
             <div class='order'>
-                <h2>${order.name}</h2>
-                <p>Quantidade: ${order.quantity}</p>
-                <p>R$ ${order.price}
+                <h1>${order.name}</h1>
+                <p class='quantity'>${order.quantity}</p>
+                <p class='price'>R$ ${order.price}</p>
             </div>
         `);
     } catch (error) {
