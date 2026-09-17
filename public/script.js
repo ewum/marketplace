@@ -34,7 +34,7 @@ function getSalesPage() {
             <div id='sales'></div>`;
 }
 
-function getUsersPage() {
+function getUserPage() {
     return `<div id='user'></div>`;
 }
 
@@ -166,6 +166,7 @@ const routes = {
     '/orders': {page: getOrdersPage},
     '/orders/:id': {page: getOrderPage, init: loadOrder},
     '/sales': {page: getSalesPage},
+    '/user/:id': {page: getUserPage},
     '/account': {page: getAccountPage}
 };
 
