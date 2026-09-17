@@ -1,19 +1,19 @@
 function getLoginPage() {
     return `<div class='login'>
                 <h1>login</h1>
-                <input type='email' id='email' placeholder='email'>
-                <input type='password' id='password' placeholder='password'>
-                <button id='login'>login</button>
+                <input type='email' id='login_email' placeholder='email'>
+                <input type='password' id='login_password' placeholder='password'>
+                <button id='loginbtn'>login</button>
             </div>`
 }
 
 function getRegisterPage() {
     return `<div class='register'>
                 <h1>register</h1>
-                <input type='email' id='email' placeholder='email'>
-                <input type='password' id='password' placeholder='password'>
-                <input type='password' id='same_password placeholder='same password'
-                <button id='register'>register</button>
+                <input type='email' id='register_email' placeholder='email'>
+                <input type='password' id='register_password' placeholder='password'>
+                <input type='password' id='register_same_password placeholder='same password'
+                <button id='registerbtn'>register</button>
             </div>`
 }
 
@@ -230,6 +230,23 @@ document.addEventListener('click', (e) => {
     if (e.target.matches('a[data-link]')) {
         e.preventDefault();
         navigate(e.target.getAttribute('href'));
+    }
+    else if (e.target.id == 'loginbtn') {
+        const email = document.getElementById('login_email');
+        const password = document.getElementById('login_password');
+        const res = await fetch('/api/auth/login', {
+            METHOD: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({email, password})
+        });
+        if (!res.ok) {
+            throw new error('unknown error occurred');
+        }
+        const token = await res.json();
+        localStorage.setItem('token', token);
+    }
+    else if (e.target.id == 'registerbtn') {
+    
     }
 });
 
