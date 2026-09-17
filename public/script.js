@@ -1,16 +1,20 @@
 function getLoginPage() {
-    return `<h1>login</h1>
-            <input type='email' id='email' placeholder='email'>
-            <input type='password' id='password' placeholder='password'>
-            <button id='login'>login</button>`
+    return `<div class='login'>
+                <h1>login</h1>
+                <input type='email' id='email' placeholder='email'>
+                <input type='password' id='password' placeholder='password'>
+                <button id='login'>login</button>
+            </div>`
 }
 
 function getRegisterPage() {
-    return `<h1>register</h1>
-            <input type='email' id='email' placeholder='email'>
-            <input type='password' id='password' placeholder='password'>
-            <input type='password' id='same_password placeholder='same password'
-            <button id='register'>register</button>`
+    return `<div class='register'>
+                <h1>register</h1>
+                <input type='email' id='email' placeholder='email'>
+                <input type='password' id='password' placeholder='password'>
+                <input type='password' id='same_password placeholder='same password'
+                <button id='register'>register</button>
+            </div>`
 }
 
 function getBuyPage() {
@@ -42,7 +46,7 @@ function getOrderPage() {
 }
 
 function getSalesPage() {
-    return `<h1>my Sales</h1>
+    return `<h1>my sales</h1>
             <div id='sales'></div>`;
 }
 
