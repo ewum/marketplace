@@ -33,7 +33,7 @@ function getSalesPage() {
 }
 
 function getAccountPage() {
-    return `<h1>Manage account</h1>
+    return `<h1>My account</h1>
             <div id='account'></div>`;
 }
 
@@ -51,8 +51,8 @@ async function loadProducts() {
 
         div.innerHTML = products.map(product => `
             <div class='product'>
-                <h2>${product.name}</h2>
-                <p>R$ ${product.price}</p>
+                <h2 class='name'>${product.name}</h2>
+                <p class='price'>R$ ${product.price}</p>
             </div>
         `).join('');
     } catch (error) {
@@ -88,8 +88,11 @@ async function loadProduct(id) {
                 <p class='answer'>${question.answer} || 'sem resposta'</p>
                 <p class='created_at'>${question.created_at}</p>
                 <p class='answered_at'>${question.answered_at}</p>
-            `)};
+            `).join('')};
         `;
+    } catch (error) {
+        console.error(error);
+        div.innerHTML = '<p>failed to load product</p>';    
     }
 }
 
@@ -100,21 +103,45 @@ async function loadOrders() {
         const response = await fetch('/api/orders');
 
         if (!response.ok) {
-            throw new Error('failed to laod orders');
+            throw new Error('failed to load orders');
         }
 
         const orders = await response.json();
 
         div.innerHTML = orders.map(order => `
             <div class='order'>
-                <h1>${order.name}</h1>
+                <p class='product_name'>${order.product_name}</p>
                 <p class='quantity'>${order.quantity}</p>
                 <p class='price'>R$ ${order.price}</p>
             </div>
         `);
     } catch (error) {
         console.error(error);
-        div.innerHTML = '<p>failed to load orders</p>'
+        div.innerHTML = '<p>failed to load orders</p>';
+    }
+}
+
+async function loadOrder(id) {
+    const div = document.getElementById('order');
+    
+    try {
+        const res = await fetch('/api/order/' + id);
+
+        if (!res.ok) {
+            throw new Error('failed to load order');
+        }
+
+        const order = await res.json();
+
+        div.innerHTML = `
+            <h2 class='order_id'>Pedido ${order.id}</h2>
+            <p class='product_name'>${order.product_name}</p>
+            <p class='quantity'>${order.quantity}</p>
+            <p class='price'>${order.total}</p>
+        `;
+    } catch (error) {
+        console.log(error);
+        div.innerHTML = '<p>failed to load order</p>';
     }
 }
 
