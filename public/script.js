@@ -136,8 +136,11 @@ async function loadOrder(id) {
         div.innerHTML = `
             <h2 class='order_id'>Pedido ${order.id}</h2>
             <p class='product_name'>${order.product_name}</p>
+            <p class='price'>${order.product_price}</p>
             <p class='quantity'>${order.quantity}</p>
-            <p class='price'>${order.total}</p>
+            <p class='shipping'>${order.shipping}</p>
+            <p class='total'>${order.total}</p>
+            <p class='status'>${order.status}</p>
         `;
     } catch (error) {
         console.log(error);
