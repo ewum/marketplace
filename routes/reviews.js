@@ -6,9 +6,9 @@ const authMiddleware = require('../middlewares/authmiddleware');
 router.get('/:user_id', (req, res) => {
 	const {user_id} = req.params;
 	db.query(
-		`SELECT r.seller_id, r.rating, r.comment, buyer.name
+		`SELECT r.seller_id, r.rating, r.comment, r.buyer_id, buyer.name AS buyer_name
 		FROM user_reviews r
-		JOIN users buyer ON r.seller_id = buyer.id
+		JOIN users buyer ON r.buyer_id = buyer.id
 		WHERE r.seller_id = ?`,
 		[user_id],
 		(err, results) => {
