@@ -35,7 +35,7 @@ router.post('/:product_id/ask', (req, res) => {
 router.patch('/:question_id/answer', authMiddleware, (req, res) => {
     const {question_id} = req.params;
     db.query(
-        `UPDATE user_reviews
+        `UPDATE product_questions
         SET answer = ?
         WHERE id = ? AND seller_id = ?`,
         [req.body.answer, question_id, req.user.id],
