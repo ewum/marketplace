@@ -145,6 +145,8 @@ async function loadOrder(id) {
             <p class='shipping'>${order.shipping}</p>
             <p class='total'>${order.total}</p>
             <p class='status'>${order.status}</p>
+            <p class='created_at'>${order.status}</p>
+            <a class='seller' href='users/${id}'>${order.seller_name}</a>
         `;
     } catch (error) {
         console.log(error);
