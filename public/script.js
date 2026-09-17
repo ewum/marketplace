@@ -1,27 +1,25 @@
 function getBuyPage() {
     return `
-        <h1>Browse products</h1>
+        <h1>browse products</h1>
         <div id='products'></div>`;
 }
 
 function getProductPage() {
-    return `
-        <h1>view product</h1>
-        <div id='product'></div>`;
+    return `<div id='product'></div>`;
 }
 
 function getSellPage() { 
-    return `<h1>Sell</h1>
+    return `<h1>sell something</h1>
             <div id='sell'></div>`;
 }
 
 function getCartPage() {
-    return `<h1>My cart</h1>
+    return `<h1>my cart</h1>
             <div id='cart'></div>`;
 }
 
 function getOrdersPage() {
-    return `<h1>My orders</h1>
+    return `<h1>my orders</h1>
             <div id='orders'></div>`;
 }
 
@@ -30,12 +28,12 @@ function getOrderPage() {
 }
 
 function getSalesPage() {
-    return `<h1>My Sales</h1>
+    return `<h1>my Sales</h1>
             <div id='sales'></div>`;
 }
 
 function getAccountPage() {
-    return `<h1>My account</h1>
+    return `<h1>my account</h1>
             <div id='account'></div>`;
 }
 
