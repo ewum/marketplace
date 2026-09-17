@@ -85,6 +85,7 @@ async function loadProduct(id) {
             <p class='price'>${product.price}</p>
             <p class='stock'>${product.stock}</p>
             <p class='created_at'>${product.created_at}</p>
+            <a class='seller' href='users/${product.seller_id}'>${product.seller_name}</a>
             <h2 class='questions'>Perguntas</h2>
             ${questions.map(question => `
                 <h2 class='asker'>${question.asker}</h2>
@@ -146,7 +147,7 @@ async function loadOrder(id) {
             <p class='total'>${order.total}</p>
             <p class='status'>${order.status}</p>
             <p class='created_at'>${order.status}</p>
-            <a class='seller' href='users/${id}'>${order.seller_name}</a>
+            <a class='seller' href='users/${order.seller_id}'>${order.seller_name}</a>
         `;
     } catch (error) {
         console.log(error);
