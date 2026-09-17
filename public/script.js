@@ -117,7 +117,7 @@ async function loadOrders() {
             <div class='order'>
                 <p class='product_name'>${order.product_name}</p>
                 <p class='quantity'>${order.quantity}</p>
-                <p class='price'>R$ ${order.price}</p>
+                <p class='price'>R$ ${order.total}</p>
             </div>
         `);
     } catch (error) {
