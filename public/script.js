@@ -32,6 +32,10 @@ function getSalesPage() {
             <div id='sales'></div>`;
 }
 
+function getUsersPage() {
+    return `<div id='user'></div>`
+}
+
 function getAccountPage() {
     return `<h1>My account</h1>
             <div id='account'></div>`;
