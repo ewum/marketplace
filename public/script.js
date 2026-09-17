@@ -88,11 +88,11 @@ async function loadProduct(id) {
             <p class='stock'>${product.stock}</p>
             <p class='created_at'>${product.created_at}</p>
             <a class='seller' href='users/${product.seller_id}'>${product.seller_name}</a>
-            <h2 class='questions'>Perguntas</h2>
+            <h2 class='questions'>questions</h2>
             ${questions.map(question => `
-                <h2 class='asker'>${question.asker}</h2>
+                <a class='asker' href='users/${question.asker_id}'>${question.asker_name}</a>
                 <p class='question'>${question.question}</p>
-                <p class='answer'>${question.answer} || 'sem resposta'</p>
+                <p class='answer'>${question.answer}</p>
                 <p class='created_at'>${question.created_at}</p>
                 <p class='answered_at'>${question.answered_at}</p>
             `).join('')};
@@ -119,7 +119,7 @@ async function loadOrders() {
             <div class='order'>
                 <p class='product_name'>${order.product_name}</p>
                 <p class='quantity'>${order.quantity}</p>
-                <p class='price'>R$ ${order.total}</p>
+                <p class='price'>$ ${order.total}</p>
             </div>
         `);
     } catch (error) {
@@ -141,7 +141,7 @@ async function loadOrder(id) {
         const order = await res.json();
 
         div.innerHTML = `
-            <h2 class='order_id'>Pedido ${order.id}</h2>
+            <h2 class='order_id'>order ${order.id}</h2>
             <p class='product_name'>${order.product_name}</p>
             <p class='price'>${order.product_price}</p>
             <p class='quantity'>${order.quantity}</p>
