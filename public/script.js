@@ -1,15 +1,13 @@
 function getBuyPage() {
     return `
         <h1>Browse products</h1>
-        <div id='products'></div>
-    `;
+        <div id='products'></div>`;
 }
 
-;function getProductPage() {
+function getProductPage() {
     return `
         <h1>view product</h1>
-        <div id='product'></div>
-    `;
+        <div id='product'></div>`;
 }
 
 function getSellPage() { 
@@ -27,13 +25,17 @@ function getOrdersPage() {
             <div id='orders'></div>`;
 }
 
+function getOrderPage() {
+    return `<div id='order'></div>`;
+}
+
 function getSalesPage() {
     return `<h1>My Sales</h1>
             <div id='sales'></div>`;
 }
 
 function getUsersPage() {
-    return `<div id='user'></div>`
+    return `<div id='user'></div>`;
 }
 
 function getAccountPage() {
