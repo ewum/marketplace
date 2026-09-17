@@ -1,7 +1,21 @@
+function getLoginPage() {
+    return `<h1>login</h1>
+            <input type='email' id='email' placeholder='email'>
+            <input type='password' id='password' placeholder='password'>
+            <button id='login'>login</button>`
+}
+
+function getRegisterPage() {
+    return `<h1>register</h1>
+            <input type='email' id='email' placeholder='email'>
+            <input type='password' id='password' placeholder='password'>
+            <input type='password' id='same_password placeholder='same password'
+            <button id='register'>register</button>`
+}
+
 function getBuyPage() {
-    return `
-        <h1>browse products</h1>
-        <div id='products'></div>`;
+    return `<h1>browse products</h1>
+            <div id='products'></div>`;
 }
 
 function getProductPage() {
