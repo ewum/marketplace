@@ -167,7 +167,7 @@ const routes = {
     '/account': {page: getAccountPage}
 };
 
-function matchRoute(path) = {
+function matchRoute(path) {
     for (const pattern in routes) {
         const keys = [];
         const regex = new RegExp('^' +
