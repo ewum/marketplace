@@ -11,12 +11,12 @@ function getProductPage() {
 }
 
 function getSellPage() { 
-    return `<h1>Sell your stuff</h1>
+    return `<h1>Sell</h1>
             <div id='sell'></div>`;
 }
 
 function getCartPage() {
-    return `<h1>Your cart</h1>
+    return `<h1>My cart</h1>
             <div id='cart'></div>`;
 }
 
@@ -34,13 +34,13 @@ function getSalesPage() {
             <div id='sales'></div>`;
 }
 
-function getUserPage() {
-    return `<div id='user'></div>`;
-}
-
 function getAccountPage() {
     return `<h1>My account</h1>
             <div id='account'></div>`;
+}
+
+function getUserPage() {
+    return `<div id='user'></div>`;
 }
 
 async function loadProducts() {
