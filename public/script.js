@@ -252,7 +252,7 @@ document.addEventListener('click', async (e) => {
         const password = document.getElementById('register_password');
         const confirm_password = document.getElementById('register_confirm_password');
         if (password != confirm_password) {
-            document.getElementById('login_error').textContent = 'passwords do not match';
+            document.getElementById('register_error').textContent = 'passwords do not match';
         }
         const res = await fetch('/api/auth/register', {
             METHOD: 'POST',
