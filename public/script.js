@@ -253,8 +253,9 @@ document.addEventListener('click', async (e) => {
         const email = document.getElementById('register_email').value;
         const password = document.getElementById('register_password').value;
         const confirm_password = document.getElementById('register_confirm_password').value;
+        const register_error = getElementById('register_error');
         if (password != confirm_password) {
-            document.getElementById('register_error').textContent = 'passwords do not match';
+            register_error.textContent = 'passwords do not match';
             return;
         }
         const res = await fetch('/api/auth/register', {
@@ -262,11 +263,12 @@ document.addEventListener('click', async (e) => {
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({name, email, password, confirm_password}) 
         });
+        const data = await res.json();
         if (!res.ok) {
-            throw new Error('failed to fetch register');
+            register_error.textContent = data.error;
+            return;
         }
-        const token = await res.json();
-        localStorage.setItem('token', token);
+        localStorage.setItem('token', data);
     }
 });
 
