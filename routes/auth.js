@@ -29,7 +29,7 @@ router.post('/register', (req, res) => {
                     process.env.JWT_SECRET,
                     {expiresIn: '10m'}
                 )
-                res.cookie('token', token, {httpOnly: True});
+                res.cookie('token', token, {httpOnly: true});
                 res.status(200).json({message: 'registred successfully'})
             }
         );
@@ -50,7 +50,7 @@ router.post('/login', (req, res ) => {
                 process.env.JWT_SECRET,
                 {expiresIn: '10m'}
             );
-            res.cookie('token', token, {httpOnly: True});
+            res.cookie('token', token, {httpOnly: true});
             res.status(200).json({message: 'logged successfully'})
         })
     });
