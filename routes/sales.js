@@ -33,7 +33,7 @@ router.get('/:order_id', authMiddleware, (req, res) => {
 	);
 });
 
-router.post('/:order_id/cancel', authMiddleware, (req, res) => {
+router.patch('/:order_id/cancel', authMiddleware, (req, res) => {
 	const {order_id} = req.params;
 	db.query(
 		`UPDATE orders o
