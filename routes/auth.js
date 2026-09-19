@@ -13,9 +13,9 @@ router.post('/register', (req, res) => {
     if (password != confirm_password) {
         return res.status(400).json({error: 'passwords do not match'});
     }
-    const existing = db.query("SELECT * FROM users WHERE email = ?", [email])
+    const existing = db.query("SELECT * FROM users WHERE email = ?", [email]);
     if (existing.length > 0) {
-        return res.status(400).json({error: 'email already registred'})
+        return res.status(400).json({error: 'email already registred'});
     }
     bcrypt.hash(password, 10, (err, hash) => {
         if (err) return res.status(500).json({error: err.message});
@@ -28,9 +28,9 @@ router.post('/register', (req, res) => {
                     {id: result.insertId, email: email},
                     process.env.JWT_SECRET,
                     {expiresIn: '10m'}
-                )
+                );
                 res.cookie('token', token, {httpOnly: true});
-                res.status(200).json({message: 'registred successfully'})
+                res.status(200).json({message: 'registred successfully'});
             }
         );
     });
@@ -51,9 +51,14 @@ router.post('/login', (req, res ) => {
                 {expiresIn: '10m'}
             );
             res.cookie('token', token, {httpOnly: true});
-            res.status(200).json({message: 'logged successfully'})
-        })
+            res.status(200).json({message: 'logged in successfully'});
+        });
     });
+});
+
+router.post('/logout', {req, res} => {
+    req.clearCookie('token');
+    res.status(200).json({message: 'logged out successfully'});
 });
 
 router.get('/verify', authMiddleware, (req, res) => {
