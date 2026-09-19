@@ -25,4 +25,17 @@ router.get('/:product_id', (req, res) => {
     );
 });
 
+router.post('/create', authMiddleware, (req, res) => {
+    const {name, description, price, stock} = req.body;
+    db.query(
+        `INSERT INTO products(name, description, price, stock)
+        VALUES (?, ?, ?, ?)`,
+        [name, description, price, stock],
+        (err, result) => {
+            if (err) return res.status(500).json({error: err.message});
+            res.status(201).json({result.insertId});
+        }
+    );
+});
+
 module.exports = router;
