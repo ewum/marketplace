@@ -29,7 +29,7 @@ router.post('/register', (req, res) => {
                     {expiresIn: '10m'}
                 )
                 res.cookie('token', token, {httpOnly: True});
-                res.status(200).json({'registred successfully'})
+                res.status(200).json({message: 'registred successfully'})
             }
         );
     });
@@ -50,9 +50,13 @@ router.post('/login', (req, res ) => {
                 {expiresIn: '10m'}
             );
             res.cookie('token', token, {httpOnly: True});
-            res.status(200).json({'logged successfully'})
+            res.status(200).json({message: 'logged successfully'})
         })
     });
 });
+
+router.get('/verify', authMiddleware, (req, res) => {
+    return res.status(200).json({message: 'successfully verified'});
+})
 
 module.exports = router;
