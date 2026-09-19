@@ -23,7 +23,12 @@ router.post('/register', (req, res) => {
             [name, email, hash],
             (err, result) => {
                 if (err) return res.status(500).json({error: err.message});
-                res.status(201).json({id: result.insertId, name, email});
+                const token = jwt.sign(
+                    {id: result.insertId, email: email},
+                    process.env.JWT_SECRET,
+                    {expiresIn: '10m'}
+                )
+                res.status(201).json({token});
             }
         );
     });
