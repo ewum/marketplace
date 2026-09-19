@@ -5,9 +5,11 @@ const jwt = require('jsonwebtoken');
 const db = require ('../db');
 
 router.post('/register', (req, res) => {
-    const {name, email, password} = req.body;
-    if (!name || !email || !password) {
+    const {name, email, password, confirm_password} = req.body;
+    if (!name || !email || !password || !confirm_password) {
         return res.status(400).json({error: 'missing fields'});
+    } else if (password != confirm_password) {
+        return res.status(400).json({error: 'passwords do not match'});
     }
     bcrypt.hash(password, 10, (err, hash) => {
         if (err) return res.status(500).json({error: err.message});
