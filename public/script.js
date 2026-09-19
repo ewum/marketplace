@@ -109,7 +109,7 @@ async function loadProduct(id) {
         const productRes = await fetch('/api/products/' + id);
         const questionsRes = await fetch('/api/questions/' + id);
 
-        if (!response.ok) {
+        if (!productRes) {
             throw new Error('failed to fetch products');
         }
 
