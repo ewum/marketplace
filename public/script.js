@@ -11,6 +11,7 @@ function getLoginPage() {
 function getRegisterPage() {
     return `<div class='register'>
                 <h1>register</h1>
+                <input type='text' id='register_name' placeholder='name'>
                 <input type='email' id='register_email' placeholder='email'>
                 <input type='password' id='register_password' placeholder='password'>
                 <input type='password' id='register_confirm_password' placeholder='same password'>
@@ -248,6 +249,7 @@ document.addEventListener('click', async (e) => {
         localStorage.setItem('token', token);
     }
     else if (e.target.id == 'registerbtn') {
+        const name = document.getElementById('register_name').value;
         const email = document.getElementById('register_email').value;
         const password = document.getElementById('register_password').value;
         const confirm_password = document.getElementById('register_confirm_password').value;
@@ -258,7 +260,7 @@ document.addEventListener('click', async (e) => {
         const res = await fetch('/api/auth/register', {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({email, password, confirm_password}) 
+            body: JSON.stringify({name, email, password, confirm_password}) 
         });
         if (!res.ok) {
             throw new Error('failed to fetch register');
