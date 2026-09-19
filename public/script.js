@@ -253,7 +253,7 @@ document.addEventListener('click', async (e) => {
         const email = document.getElementById('register_email').value;
         const password = document.getElementById('register_password').value;
         const confirm_password = document.getElementById('register_confirm_password').value;
-        const register_error = getElementById('register_error');
+        const register_error = document.getElementById('register_error');
         if (password != confirm_password) {
             register_error.textContent = 'passwords do not match';
             return;
