@@ -47,4 +47,19 @@ router.patch('/:question_id/answer', authMiddleware, (req, res) => {
     );
 });
 
+router.delete('/:question_id/delete', authMiddleware, (req, res) => {
+    const {question_id} = req.params;
+    db.query(`
+        DELETE FROM product_questions q
+        JOIN products p ON q.product_id = p.id
+        WHERE q.id = ? AND p.seller_id = ?
+        `,
+        [question_id, req.user.id],
+        (err, result) => {
+            if (err) return res.status(500).json({error: 'internal server error'});
+            res.status(204).json({message: 'deleted question successfully'});
+        }
+    );
+});
+
 module.exports = router;
