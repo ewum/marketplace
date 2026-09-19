@@ -195,7 +195,7 @@ async function loadOrder(id) {
 const routes = {
     '/': {page: getBuyPage, init: loadProducts},
     '/login': {page: getLoginPage, init: loadLogin},
-    '/register': {page: getRegisterPage, init: LoadRegister},
+    '/register': {page: getRegisterPage, init: loadRegister},
     '/buy': {page: getBuyPage, init: loadProducts},
     '/product/:id': {page: getProductPage, init: loadProduct},
     '/sell': {page: getSellPage},
