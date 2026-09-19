@@ -56,7 +56,7 @@ router.post('/login', (req, res ) => {
     });
 });
 
-router.post('/logout', {req, res} => {
+router.post('/logout', (req, res) => {
     req.clearCookie('token');
     res.status(200).json({message: 'logged out successfully'});
 });
