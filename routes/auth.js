@@ -8,8 +8,13 @@ router.post('/register', (req, res) => {
     const {name, email, password, confirm_password} = req.body;
     if (!name || !email || !password || !confirm_password) {
         return res.status(400).json({error: 'missing fields'});
-    } else if (password != confirm_password) {
+    } 
+    if (password != confirm_password) {
         return res.status(400).json({error: 'passwords do not match'});
+    }
+    const existing = db.query("SELECT * FROM users WHERE email = ?", [email])
+    if (existing.length > 0) {
+        return res.status(400).json({error: 'email already registred'})
     }
     bcrypt.hash(password, 10, (err, hash) => {
         if (err) return res.status(500).json({error: err.message});
