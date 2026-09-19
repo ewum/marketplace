@@ -226,7 +226,7 @@ function navigate(path) {
     renderContent();
 }
 
-document.addEventListener('click', (e) => {
+document.addEventListener('click', async (e) => {
     if (e.target.matches('a[data-link]')) {
         e.preventDefault();
         navigate(e.target.getAttribute('href'));
