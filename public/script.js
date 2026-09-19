@@ -237,16 +237,18 @@ document.addEventListener('click', async (e) => {
     else if (e.target.id == 'loginbtn') {
         const email = document.getElementById('login_email').value;
         const password = document.getElementById('login_password').value;
+        const login_error = document.getElementById('login_error');
         const res = await fetch('/api/auth/login', {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({email, password})
         });
+        const data = await res.json();
         if (!res.ok) {
-            throw new Error('failed to fetch register');
+            login_error.textContent = data.error;
+            return;
         }
-        const token = await res.json();
-        localStorage.setItem('token', token.token);
+        localStorage.setItem('token', data.token);
     }
     else if (e.target.id == 'registerbtn') {
         const name = document.getElementById('register_name').value;
