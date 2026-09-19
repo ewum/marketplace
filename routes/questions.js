@@ -12,7 +12,7 @@ router.get('/:product_id', (req, res) => {
         WHERE q.product_id = ?`,
         [product_id],
         (err, results) => {
-            if (err) return res.status(500).json({error: err.message});
+            if (err) return res.status(500).json({error: 'internal server error'});
             res.json(results);
         }
     );
@@ -26,7 +26,7 @@ router.post('/:product_id/ask', (req, res) => {
         VALUES (?, ?, ?)`,
         [product_id, asker_id, question],
         (err, results) => {
-            if (err) return res.status(500).json({error: err.message});
+            if (err) return res.status(500).json({error: 'internal server error'});
             res.status(201).json({message: 'question created successfully'});
         }
     );
@@ -40,7 +40,7 @@ router.patch('/:question_id/answer', authMiddleware, (req, res) => {
         WHERE id = ? AND seller_id = ?`,
         [req.body.answer, question_id, req.user.id],
         (err, results) => {
-            if (err) return res.status(500).json({error: err.message});
+            if (err) return res.status(500).json({error: 'internal server error'});
             if (results.affectedRows === 0) return res.status(404).json({error: 'review not found'});
             res.status(200).json({message: 'question answered successfully'});
         }

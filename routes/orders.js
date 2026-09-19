@@ -11,7 +11,7 @@ router.get('/', authMiddleware, (req, res) => {
         WHERE o.buyer_id = ?`,
         [req.user.id],
         (err, results) => {
-            if (err) return res.status(500).json({error: err.message});
+            if (err) return res.status(500).json({error: 'internal server error'});
             res.json(results);
         }
     );
@@ -27,7 +27,7 @@ router.get('/:order_id', authMiddleware, (req, res) => {
         WHERE o.id = ? AND o.buyer_id = ?`,
         [order_id, req.user.id],
         (err, results) => {
-            if (err) return res.status(500).json({error: err.message});
+            if (err) return res.status(500).json({error: 'internal server error'});
             if (results.length == 0) return res.status(404).json({error: 'order not found'});
             res.json(results);
         }

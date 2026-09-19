@@ -19,12 +19,12 @@ router.post('/register', (req, res) => {
         }
     });
     bcrypt.hash(password, 10, (err, hash) => {
-        if (err) return res.status(500).json({error: err.message});
+        if (err) return res.status(500).json({error: 'internal server error'});
         db.query(
             'INSERT INTO users(name, email, password_hash) VALUES (?, ?, ?)',
             [name, email, hash],
             (err, result) => {
-                if (err) return res.status(500).json({error: err.message});
+                if (err) return res.status(500).json({error: 'internal server error'});
                 const token = jwt.sign(
                     {id: result.insertId, email: email},
                     process.env.JWT_SECRET,
@@ -40,11 +40,11 @@ router.post('/register', (req, res) => {
 router.post('/login', (req, res ) => {
     const {email, password} = req.body;
     db.query('SELECT * FROM users WHERE email = ?', [email], (err, results) => {
-        if (err) return res.status(500).json({error: err.message});
+        if (err) return res.status(500).json({error: 'internal server error'});
         if (results.length === 0) return res.status(401).json({error: 'invalid credentials'});
         const user = results[0];
         bcrypt.compare(password, user.password_hash, (err, match) => {
-            if (err) return res.status(500).json({error: err.message});
+            if (err) return res.status(500).json({error: 'internal server error'});
             if (!match) return res.status(401).json({error: 'invalid credentials'});
             const token = jwt.sign(
                 {id: user.id, email: user.email},

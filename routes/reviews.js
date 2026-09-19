@@ -12,7 +12,7 @@ router.get('/:user_id', (req, res) => {
 		WHERE r.seller_id = ?`,
 		[user_id],
 		(err, results) => {
-			if (err) return res.status(500).json({error: err.message});
+			if (err) return res.status(500).json({error: 'internal server error'});
 			res.json(results);
 		}
 	);
@@ -31,7 +31,7 @@ router.post('/:seller_id/rate', authMiddleware, (req, res) => {
 		)`,
 		[seller_id, req.user.id, req.body.rating, req.body.comment, seller_id, req.user.id],
 		(err, results) => {
-			if (err) return res.status(500).json({error: err.message});
+			if (err) return res.status(500).json({error: 'internal server error'});
 			res.status(201).json({message: 'review posted successfully'});
 		}
 	);

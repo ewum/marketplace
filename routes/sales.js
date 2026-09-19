@@ -11,7 +11,7 @@ router.get('/', authMiddleware, (req, res) => {
 		WHERE p.seller_id = ?`,
 		[req.user.id],
 		(err, results) => {
-			if (err) return res.status(500).json({error: err.message});
+			if (err) return res.status(500).json({error: 'internal server error'});
 			res.json(results);
 		}
 	);
@@ -26,7 +26,7 @@ router.get('/:order_id', authMiddleware, (req, res) => {
 		WHERE o.id = ? AND p.seller_id = ?`,
 		[order_id, req.user.id],
 		(err, results) => {
-			if (err) return res.status(500).json({error: err.message});
+			if (err) return res.status(500).json({error: 'internal server error'});
 			if (results.length == 0) return res.status(404).json({error: 'no sale found'});
 			res.json(results[0]);
 		}
@@ -42,9 +42,9 @@ router.patch('/:order_id/cancel', authMiddleware, (req, res) => {
 		WHERE o.id = ? AND p.seller_id = ? AND o.status in ('pending', 'paid')`,
 		['cancelled', order_id, req.user.id],
 		(err, results) => {
-			if (err) return res.status(500).json({error: err.message});
+			if (err) return res.status(500).json({error: 'internal server error'});
 			if (results.length == 0) return res.status(404).json({error: 'no sale found'});
-			if (results.affectedRows === 0) return res.status(400).json({error: 'order cannot be cancelled'});
+			if (results.affectedRows === 0) return res.status(400).json({error: 'order can not be cancelled'});
 			res.json({message: 'sale cancelled successfully'});
 		}	
 	);
