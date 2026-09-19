@@ -4,6 +4,7 @@ function getLoginPage() {
                 <input type='email' id='login_email' placeholder='email'>
                 <input type='password' id='login_password' placeholder='password'>
                 <button id='loginbtn'>login</button>
+                <p id='login_error'></p>
             </div>`
 }
 
@@ -14,6 +15,7 @@ function getRegisterPage() {
                 <input type='password' id='register_password' placeholder='password'>
                 <input type='password' id='register_confirm_password placeholder='same password'>
                 <button id='registerbtn'>register</button>
+                <p id='register_error'></p>
             </div>`
 }
 
@@ -249,6 +251,9 @@ document.addEventListener('click', async (e) => {
         const email = document.getElementById('register_email');
         const password = document.getElementById('register_password');
         const confirm_password = document.getElementById('register_confirm_password');
+        if (password != confirm_password) {
+            document.getElementById('login_error').textContent = 'passwords do not match';
+        }
         const res = await fetch('/api/auth/register', {
             METHOD: 'POST',
             headers: {'Content-Type': 'application/json'},
