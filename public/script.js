@@ -264,14 +264,3 @@ document.addEventListener('click', (e) => {
 
 window.addEventListener('popstate', renderContent);
 window.addEventListener('load', renderContent);
-
-const state = {
-    users: [],
-    currentPage: 'buy',
-    isLoading: false
-}
-
-function updateState(newState) {
-    Object.assign(state, newState);
-    renderContent();
-}
