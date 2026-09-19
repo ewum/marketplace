@@ -28,7 +28,8 @@ router.post('/register', (req, res) => {
                     process.env.JWT_SECRET,
                     {expiresIn: '10m'}
                 )
-                res.status(201).json({token});
+                res.cookie('token', token, {httpOnly: True});
+                res.status(200).json({'registred successfully'})
             }
         );
     });
@@ -48,7 +49,8 @@ router.post('/login', (req, res ) => {
                 process.env.JWT_SECRET,
                 {expiresIn: '10m'}
             );
-            res.json({token});
+            res.cookie('token', token, {httpOnly: True});
+            res.status(200).json({'logged successfully'})
         })
     });
 });

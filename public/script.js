@@ -62,6 +62,8 @@ function getUserPage() {
     return `<div id='user'></div>`;
 }
 
+async function 
+
 async function loadProducts() {
     const div = document.getElementById('products');
 
@@ -248,7 +250,7 @@ document.addEventListener('click', async (e) => {
             login_error.textContent = data.error;
             return;
         }
-        localStorage.setItem('token', data.token);
+        navigate('/buy');
     }
     else if (e.target.id == 'registerbtn') {
         const name = document.getElementById('register_name').value;
@@ -270,7 +272,7 @@ document.addEventListener('click', async (e) => {
             register_error.textContent = data.error;
             return;
         }
-        localStorage.setItem('token', data.token);
+        navigate('/buy');
     }
 });
 
