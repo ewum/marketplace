@@ -242,7 +242,7 @@ document.addEventListener('click', async (e) => {
             body: JSON.stringify({email, password})
         });
         if (!res.ok) {
-            throw new error('failed to fetch register');
+            throw new Error('failed to fetch register');
         }
         const token = await res.json();
         localStorage.setItem('token', token);
@@ -261,7 +261,7 @@ document.addEventListener('click', async (e) => {
             body: JSON.stringify({email, password, confirm_password}) 
         });
         if (!res.ok) {
-            throw new error('failed to fetch register');
+            throw new Error('failed to fetch register');
         }
         const token = await res.json();
         localStorage.setItem('token', token);
