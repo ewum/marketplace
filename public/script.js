@@ -63,7 +63,7 @@ function getUserPage() {
 }
 
 async function loadLogin() {
-    const res = await fetch('/api/auth/verify');
+    const res = await fetch('/api/auth/verify', {credentials: 'include'});
     if (res.ok) {
         navigate('/buy');
         return;
@@ -71,7 +71,7 @@ async function loadLogin() {
 }
 
 async function loadRegister() {
-    const res = await fetch('/api/auth/verify');
+    const res = await fetch('/api/auth/verify', {credentials: 'include'});
     if (res.ok) {
         navigate('/buy');
         return;
@@ -142,7 +142,7 @@ async function loadOrders() {
     const div = document.getElementById('orders');
 
     try {
-        const response = await fetch('/api/orders');
+        const response = await fetch('/api/orders', {credentials: 'include'});
 
         if (!response.ok) {
             throw new Error('failed to load orders');
@@ -167,7 +167,7 @@ async function loadOrder(id) {
     const div = document.getElementById('order');
     
     try {
-        const res = await fetch('/api/order/' + id);
+        const res = await fetch('/api/order/' + id, {credentials: 'include'});
 
         if (!res.ok) {
             throw new Error('failed to load order');
@@ -257,7 +257,8 @@ document.addEventListener('click', async (e) => {
         const res = await fetch('/api/auth/login', {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({email, password})
+            body: JSON.stringify({email, password}),
+            credentials: 'include'
         });
         const data = await res.json();
         if (!res.ok) {
@@ -279,7 +280,8 @@ document.addEventListener('click', async (e) => {
         const res = await fetch('/api/auth/register', {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({name, email, password, confirm_password}) 
+            body: JSON.stringify({name, email, password, confirm_password}),
+            credentials: 'include'
         });
         const data = await res.json();
         if (!res.ok) {
