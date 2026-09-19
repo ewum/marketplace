@@ -62,7 +62,21 @@ function getUserPage() {
     return `<div id='user'></div>`;
 }
 
-async function 
+async function loadLogin() {
+    const res = await fetch('/api/auth/verify');
+    if (res.ok) {
+        navigate('/buy');
+        return;
+    }
+}
+
+async function loadRegister() {
+    const res = await fetch('/api/auth/verify');
+    if (res.ok) {
+        navigate('/buy');
+        return;
+    }
+}
 
 async function loadProducts() {
     const div = document.getElementById('products');
@@ -180,8 +194,8 @@ async function loadOrder(id) {
 
 const routes = {
     '/': {page: getBuyPage, init: loadProducts},
-    '/login': {page: getLoginPage},
-    '/register': {page: getRegisterPage},
+    '/login': {page: getLoginPage, init: loadLogin},
+    '/register': {page: getRegisterPage, init: LoadRegister},
     '/buy': {page: getBuyPage, init: loadProducts},
     '/product/:id': {page: getProductPage, init: loadProduct},
     '/sell': {page: getSellPage},
