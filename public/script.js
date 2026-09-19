@@ -142,13 +142,13 @@ async function loadOrders() {
     const div = document.getElementById('orders');
 
     try {
-        const response = await fetch('/api/orders', {credentials: 'include'});
+        const res = await fetch('/api/orders', {credentials: 'include'});
 
-        if (!response.ok) {
+        if (!res.ok) {
             throw new Error('failed to load orders');
         }
 
-        const orders = await response.json();
+        const orders = await res.json();
 
         div.innerHTML = orders.map(order => `
             <div class='order'>
