@@ -237,7 +237,7 @@ document.addEventListener('click', async (e) => {
         const email = document.getElementById('login_email').value;
         const password = document.getElementById('login_password').value;
         const res = await fetch('/api/auth/login', {
-            METHOD: 'POST',
+            method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({email, password})
         });
@@ -256,7 +256,7 @@ document.addEventListener('click', async (e) => {
             return;
         }
         const res = await fetch('/api/auth/register', {
-            METHOD: 'POST',
+            method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({email, password, confirm_password}) 
         });
