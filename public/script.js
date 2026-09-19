@@ -82,13 +82,13 @@ async function loadProducts() {
     const div = document.getElementById('products');
 
     try {
-        const response = await fetch('/api/products');
+        const res = await fetch('/api/products');
 
-        if (!response.ok) {
+        if (!res.ok) {
             throw new Error('Failed to fetch products');
         }
         
-        const products = await response.json();
+        const products = await res.json();
 
         div.innerHTML = products.map(product => `
             <div class='product'>
