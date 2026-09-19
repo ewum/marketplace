@@ -13,7 +13,7 @@ function getRegisterPage() {
                 <h1>register</h1>
                 <input type='email' id='register_email' placeholder='email'>
                 <input type='password' id='register_password' placeholder='password'>
-                <input type='password' id='register_confirm_password placeholder='same password'>
+                <input type='password' id='register_confirm_password' placeholder='same password'>
                 <button id='registerbtn'>register</button>
                 <p id='register_error'></p>
             </div>`
