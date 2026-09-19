@@ -12,7 +12,7 @@ function getRegisterPage() {
                 <h1>register</h1>
                 <input type='email' id='register_email' placeholder='email'>
                 <input type='password' id='register_password' placeholder='password'>
-                <input type='password' id='register_same_password placeholder='same password'
+                <input type='password' id='register_confirm_password placeholder='same password'
                 <button id='registerbtn'>register</button>
             </div>`
 }
@@ -246,7 +246,19 @@ document.addEventListener('click', (e) => {
         localStorage.setItem('token', token);
     }
     else if (e.target.id == 'registerbtn') {
-    
+        const email = document.getElementById('register_email');
+        const password = document.getElementById('register_password');
+        const confirm_password = document.getElementById('register_confirm_password');
+        const res = await fetch('/api/auth/register'. {
+            METHOD: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({email, password, confirm_password}) 
+        });
+        if (!res.ok) {
+            throw new error('unknown error occurred');
+        }
+        const token = await res.json();
+        localStorage.setItem('token', token);
     }
 });
 
