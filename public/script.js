@@ -246,7 +246,7 @@ document.addEventListener('click', async (e) => {
             throw new Error('failed to fetch register');
         }
         const token = await res.json();
-        localStorage.setItem('token', token);
+        localStorage.setItem('token', token.token);
     }
     else if (e.target.id == 'registerbtn') {
         const name = document.getElementById('register_name').value;
@@ -268,7 +268,7 @@ document.addEventListener('click', async (e) => {
             register_error.textContent = data.error;
             return;
         }
-        localStorage.setItem('token', data);
+        localStorage.setItem('token', data.token);
     }
 });
 
