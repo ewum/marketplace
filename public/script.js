@@ -234,8 +234,8 @@ document.addEventListener('click', async (e) => {
         navigate(e.target.getAttribute('href'));
     }
     else if (e.target.id == 'loginbtn') {
-        const email = document.getElementById('login_email');
-        const password = document.getElementById('login_password');
+        const email = document.getElementById('login_email').value;
+        const password = document.getElementById('login_password').value;
         const res = await fetch('/api/auth/login', {
             METHOD: 'POST',
             headers: {'Content-Type': 'application/json'},
@@ -248,9 +248,9 @@ document.addEventListener('click', async (e) => {
         localStorage.setItem('token', token);
     }
     else if (e.target.id == 'registerbtn') {
-        const email = document.getElementById('register_email');
-        const password = document.getElementById('register_password');
-        const confirm_password = document.getElementById('register_confirm_password');
+        const email = document.getElementById('register_email').value;
+        const password = document.getElementById('register_password').value;
+        const confirm_password = document.getElementById('register_confirm_password').value;
         if (password != confirm_password) {
             document.getElementById('register_error').textContent = 'passwords do not match';
             return;
