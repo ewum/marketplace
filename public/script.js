@@ -249,7 +249,7 @@ document.addEventListener('click', async (e) => {
         const email = document.getElementById('register_email');
         const password = document.getElementById('register_password');
         const confirm_password = document.getElementById('register_confirm_password');
-        const res = await fetch('/api/auth/register'. {
+        const res = await fetch('/api/auth/register', {
             METHOD: 'POST',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({email, password, confirm_password}) 
