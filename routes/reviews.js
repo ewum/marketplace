@@ -30,7 +30,7 @@ router.post('/:seller_id/rate', authMiddleware, (req, res) => {
 			WHERE p.seller_id = ? AND o.buyer_id = ? AND o.status = 'delivered'
 		)`,
 		[seller_id, req.user.id, req.body.rating, req.body.comment, seller_id, req.user.id],
-		(err, results) => {
+		(err, result) => {
 			if (err) return res.status(500).json({error: 'internal server error'});
 			res.status(201).json({message: 'review posted successfully'});
 		}

@@ -31,9 +31,9 @@ router.post('/create', authMiddleware, (req, res) => {
         `INSERT INTO products(name, description, price, stock)
         VALUES (?, ?, ?, ?)`,
         [name, description, price, stock],
-        (err, results) => {
+        (err, result) => {
             if (err) return res.status(500).json({error: 'internal server error'});
-            res.status(201).json({id: results.insertId});
+            res.status(201).json({id: result.insertId});
         }
     );
 });

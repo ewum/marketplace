@@ -25,7 +25,7 @@ router.post('/:product_id/ask', (req, res) => {
         `INSERT INTO product_questions(product_id, asker_id, question)
         VALUES (?, ?, ?)`,
         [product_id, asker_id, question],
-        (err, results) => {
+        (err, result) => {
             if (err) return res.status(500).json({error: 'internal server error'});
             res.status(201).json({message: 'question created successfully'});
         }
@@ -39,9 +39,9 @@ router.patch('/:question_id/answer', authMiddleware, (req, res) => {
         SET answer = ?
         WHERE id = ? AND seller_id = ?`,
         [req.body.answer, question_id, req.user.id],
-        (err, results) => {
+        (err, result) => {
             if (err) return res.status(500).json({error: 'internal server error'});
-            if (results.affectedRows === 0) return res.status(404).json({error: 'review not found'});
+            if (result.affectedRows === 0) return res.status(404).json({error: 'review not found'});
             res.status(200).json({message: 'question answered successfully'});
         }
     );
@@ -54,9 +54,9 @@ router.delete('/:question_id/delete', authMiddleware, (req, res) => {
         JOIN products p ON q.product_id = p.id
         WHERE q.id = ? AND p.seller_id = ?`,
         [question_id, req.user.id],
-        (err, results) => {
+        (err, result) => {
             if (err) return res.status(500).json({error: 'internal server error'});
-            if (results.affectedRows === 0) return res.status(404).json({error: 'question not found'});
+            if (result.affectedRows === 0) return res.status(404).json({error: 'question not found'});
             res.status(204).json({message: 'deleted question successfully'});
         }
     );
