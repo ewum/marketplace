@@ -268,7 +268,7 @@ document.addEventListener('click', async (e) => {
         e.preventDefault();
         navigate(e.target.getAttribute('href'));
     }
-    else if (e.target.id == 'loginbtn') {
+    if (e.target.id == 'loginbtn') {
         const email = document.getElementById('login_email').value;
         const password = document.getElementById('login_password').value;
         const login_error = document.getElementById('login_error');
@@ -285,7 +285,7 @@ document.addEventListener('click', async (e) => {
         }
         navigate('/buy');
     }
-    else if (e.target.id == 'registerbtn') {
+    if (e.target.id == 'registerbtn') {
         const name = document.getElementById('register_name').value;
         const email = document.getElementById('register_email').value;
         const password = document.getElementById('register_password').value;
@@ -307,6 +307,10 @@ document.addEventListener('click', async (e) => {
             return;
         }
         navigate('/buy');
+    }
+    if (e.target.id == 'logoutbtn') {
+        const res = await fetch('/api/auth/logout', {method: 'POST', credentials: 'include'});
+        if (res.ok) renderContent();
     }
 });
 
