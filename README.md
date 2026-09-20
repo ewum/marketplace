@@ -1,4 +1,4 @@
-# Mini Marketplace
+# Marketplace
 # Technologies
 - JavaScript
 - Node.js
@@ -9,8 +9,8 @@
 - Docker
 # How to run
 ```
-git clone https://github.com/ewum/mini-marketplace
-cd mini-marketplace
+git clone https://github.com/ewum/marketplace
+cd marketplace
 docker compose up -d
 ```
 Access: `http://localhost:3000`
