@@ -199,10 +199,10 @@ async function getDropdown() {
         <a href='/account' data-link>account</a>
         <a href='/orders' data-link>orders</a>
         <a href='/sales' data-link>sales</a>
-        <a href='#' id='logoutbtn'>log out</a>`
+        <a href='#' id='logoutbtn'>logout</a>`
     } else {
         return `
-        <a href='/login' data-link>log in</a>
+        <a href='/login' data-link>login</a>
         <a href='/register' data-link>register</a>`
     }
 }
