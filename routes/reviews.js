@@ -32,6 +32,7 @@ router.post('/:seller_id/rate', authMiddleware, (req, res) => {
 		[seller_id, req.user.id, req.body.rating, req.body.comment, seller_id, req.user.id],
 		(err, result) => {
 			if (err) return res.status(500).json({error: 'internal server error'});
+			if (result.affectedRows === 0) return res.status(200).json({error: 'no review has been created yet'});
 			res.status(201).json({message: 'review posted successfully'});
 		}
 	);
