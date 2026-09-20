@@ -8,10 +8,13 @@
 </head>
 <body>
     <nav>
-        <a href="/buy" data-link>buy</a>
-        <a href="/sell" data-link>sell</a>
+        <input type='text' id='search' placeholder='search products'>
         <a href="/cart" data-link>cart</a>
-        <a href="/account" data-link>account</a>
+        <a href="/sell" data-link>sell</a>
+        <div class='menu'>
+            <button id='menu_btn'>m</button>
+            <div id='dropdown' class='dropdown hidden'></div>
+        </div>
     </nav>
     <div id="app"></div>
     <script src="script.js"></script>
