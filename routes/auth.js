@@ -13,8 +13,8 @@ router.post('/register', (req, res) => {
     if (password != confirm_password) {
         return res.status(400).json({error: 'passwords do not match'});
     }
-    db.query("SELECT * FROM users WHERE email = ?", [email], (err, result) => {
-        if (result.length > 0) {
+    db.query("SELECT * FROM users WHERE email = ?", [email], (err, results) => {
+        if (results.length > 0) {
             return res.status(400).json({error: 'email already registred'});
         }
     });
