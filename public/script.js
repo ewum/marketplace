@@ -192,6 +192,21 @@ async function loadOrder(id) {
     }
 }
 
+async function getDropdown() {
+    const res = await fetch('/api/auth/verify', {credentials: 'include'});
+    if (res.ok) {
+        return `
+        <a href='/account'>account</a>
+        <a href='/orders'>orders</a>
+        <a href='/sales'>sales</a>
+        <a href='#' id='logoutbtn'>log out</a>`
+    } else {
+        return `
+        <a href='/login'>log in</a>
+        <a href='/register'>register</a>`
+    }
+}
+
 const routes = {
     '/': {page: getBuyPage, init: loadProducts},
     '/login': {page: getLoginPage, init: loadLogin},
@@ -225,8 +240,11 @@ function matchRoute(path) {
 }
 
 async function renderContent() {
-    const div = document.getElementById('app');
+    const dropdown = await getDropdown()
+    document.getElementById('dropdown').innerHTML = dropdown;
+    
     const {route, params} = matchRoute(window.location.pathname);
+    const div = document.getElementById('app');
 
     if (!route) {
         div.innerHTML = '<h1>Page not found</h1>';
