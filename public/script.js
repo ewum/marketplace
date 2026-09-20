@@ -21,8 +21,7 @@ function getRegisterPage() {
 }
 
 function getBuyPage() {
-    return `<h1>browse products</h1>
-            <div id='products'></div>`;
+    return `<div id='products'></div>`;
 }
 
 function getProductPage() {
@@ -30,7 +29,7 @@ function getProductPage() {
 }
 
 function getSellPage() { 
-    return `<h1>sell something</h1>
+    return `<h1>your active listings</h1>
             <div id='sell'></div>`;
 }
 
