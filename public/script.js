@@ -196,14 +196,14 @@ async function getDropdown() {
     const res = await fetch('/api/auth/verify', {credentials: 'include'});
     if (res.ok) {
         return `
-        <a href='/account'>account</a>
-        <a href='/orders'>orders</a>
-        <a href='/sales'>sales</a>
+        <a href='/account' data-link>account</a>
+        <a href='/orders' data-link>orders</a>
+        <a href='/sales' data-link>sales</a>
         <a href='#' id='logoutbtn'>log out</a>`
     } else {
         return `
-        <a href='/login'>log in</a>
-        <a href='/register'>register</a>`
+        <a href='/login' data-link>log in</a>
+        <a href='/register' data-link>register</a>`
     }
 }
 
