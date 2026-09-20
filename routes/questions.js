@@ -54,8 +54,9 @@ router.delete('/:question_id/delete', authMiddleware, (req, res) => {
         JOIN products p ON q.product_id = p.id
         WHERE q.id = ? AND p.seller_id = ?`,
         [question_id, req.user.id],
-        (err, result) => {
+        (err, results) => {
             if (err) return res.status(500).json({error: 'internal server error'});
+            if (results.affectedRows === 0) return res.status(404).json({error: 'question not found'});
             res.status(204).json({message: 'deleted question successfully'});
         }
     );
