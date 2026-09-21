@@ -37,6 +37,7 @@ function getSellPage() {
                     <input type='number' class='stock' id='listing_stock' placeholder='stock'>
                     <input type='number' class='price' id='listing_price' placeholder='price'>
                     <select id='listing_category'></select>
+                    <button id='create_listing_btn'>create listing</button>
                 </div>
                 <div id='view-listings'>
                     <h1>view listings</h1>
