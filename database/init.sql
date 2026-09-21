@@ -3,6 +3,9 @@ CREATE TABLE users (
     name VARCHAR(150) NOT NULL,
     email VARCHAR(150) NOT NULL UNIQUE,
     password_hash VARCHAR(255) NOT NULL,
+    city VARCHAR(150),
+    state VARCHAR(150),
+    country VARCHAR(150),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP()
 );
 
@@ -52,3 +55,29 @@ CREATE TABLE orders (
     FOREIGN KEY (buyer_id) REFERENCES users(id),
     FOREIGN KEY (product_id) REFERENCES products(id)
 );
+
+CREATE TABLE categories (
+    id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    name VARCHAR(100) NOT NULL UNIQUE
+);
+
+INSERT INTO categories (name) VALUES
+('Electronics'),
+('Home appliances'),
+('Furniture'),
+('Real estate'),
+('Vehicles'),
+('Clothing and accessories'),
+('Footwear'),
+('Sports and leisure'),
+('Books and stationery'),
+('Beauty and personal care'),
+('Toys and games'),
+('Tools and construction'),
+('Pet supplies'),
+('Food and beverages'),
+('Musical instruments'),
+('Electronics accessories'),
+('Game accounts and items'),
+('Virtual currency and credits'),
+('Other');
