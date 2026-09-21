@@ -36,9 +36,8 @@ router.get('/user/user_id', (req, res) => {
             if (results.length == 0) return res.status(404).json({error: 'no products found'});
             res.json(results);
         }
-    
     );
-})
+});
 
 router.post('/create', authMiddleware, (req, res) => {
     const {name, description, price, stock} = req.body;
