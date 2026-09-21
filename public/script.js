@@ -201,13 +201,13 @@ async function loadOrder(id) {
     }
 }
 
-async function loadListings() {
+async function loadListings(id) {
     const div = document.getElementById('listings');
     try {
-        const res = await fetch('/api/orders/listing', {credentials: 'include'});
+        const res = await fetch('/api/products/user/' + id, {credentials: 'include'});
         const data = await res.json();
         if (!res.ok) {
-            throw new Error('failed to load listing');            
+            throw new Error('failed to load listings');            
         }
         div.innerHTML = data.map(listing => `
             <div class='listing'>
@@ -220,7 +220,7 @@ async function loadListings() {
         `);
     } catch (error) {
         console.log(error);
-        div.innerHTML = '<p>failed to load listing</p>';
+        div.innerHTML = '<p>failed to load listings</p>';
     }
 }
 
