@@ -29,15 +29,16 @@ function getProductPage() {
 }
 
 function getSellPage() { 
-    return `<div id='sell-page>
+    return `<div id='sell_page'>
                 <div id='create-listing'>
                     <h1>create listing</h1>
-                    <input type='text' class='product_name' id='product_name placeholder='name'>
+                    <input type='text' class='product_name' id='product_name' placeholder='name'>
                     <input type='text' class='product_description' id='product-description' placeholder='description'>
                     <input type='number' class='product_price' id='product_price' placeholder='price'>
                 </div>
-                <div id='view-listing'>
+                <div id='view-listings'>
                     <h1>view listings</h1>
+                    <div class='listings' id='listings'>
                 </div>                                                                                                                                                                        
             </div>`;
 }
@@ -200,6 +201,29 @@ async function loadOrder(id) {
     }
 }
 
+async function loadListings() {
+    const div = document.getElementById('listings');
+    try {
+        const res = await fetch('/api/orders/listing', {credentials: 'include'});
+        const data = await res.json();
+        if (!res.ok) {
+            throw new Error('failed to load listing');            
+        }
+        div.innerHTML = data.map(listing => `
+            <div class='listing'>
+                <p class='name'>${listing.name}</p>
+                <p class='description'>${listing.description}</p>
+                <p class='price'>${listing.price}</p>
+                <p class='stock'>${listing.stock}</p>
+                <button class='edit' id='product'>edit</button>
+            </div>
+        `);
+    } catch (error) {
+        console.log(error);
+        div.innerHTML = '<p>failed to load listing</p>';
+    }
+}
+
 async function getDropdown() {
     const res = await fetch('/api/auth/verify', {credentials: 'include'});
     if (res.ok) {
@@ -221,7 +245,7 @@ const routes = {
     '/register': {page: getRegisterPage, init: loadRegister},
     '/buy': {page: getBuyPage, init: loadProducts},
     '/product/:id': {page: getProductPage, init: loadProduct},
-    '/sell': {page: getSellPage},
+    '/sell': {page: getSellPage, init: loadListings},
     '/cart': {page: getCartPage},
     '/orders': {page: getOrdersPage},
     '/orders/:id': {page: getOrderPage, init: loadOrder},
