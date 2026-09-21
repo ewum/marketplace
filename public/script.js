@@ -32,9 +32,11 @@ function getSellPage() {
     return `<div id='sell_page'>
                 <div id='create-listing'>
                     <h1>create listing</h1>
-                    <input type='text' class='product_name' id='product_name' placeholder='name'>
-                    <input type='text' class='product_description' id='product-description' placeholder='description'>
-                    <input type='number' class='product_price' id='product_price' placeholder='price'>
+                    <input type='text' class='name' id='listing_name' placeholder='name'>
+                    <input type='text' class='description' id='listing_description' placeholder='description'>
+                    <input type='number' class='stock' id='listing_stock' placeholder='stock'>
+                    <input type='number' class='price' id='listing_price' placeholder='price'>
+                    <select id='listing_category'></select>
                 </div>
                 <div id='view-listings'>
                     <h1>view listings</h1>
