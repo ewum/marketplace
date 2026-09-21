@@ -23,12 +23,14 @@ CREATE TABLE user_reviews (
 CREATE TABLE products (
     id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
     seller_id INT NOT NULL,
+    category_id INT NOT NULL,
     name VARCHAR(150) NOT NULL,
     description TEXT,
     price DECIMAL(10, 2) NOT NULL,
     stock INT DEFAULT 0,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP(),
-    FOREIGN KEY (seller_id) REFERENCES users(id)
+    FOREIGN KEY (seller_id) REFERENCES users(id),
+    FOREIGN KEY (category_id) REFERENCES categories(id)
 );
 
 CREATE TABLE product_questions (
