@@ -29,8 +29,17 @@ function getProductPage() {
 }
 
 function getSellPage() { 
-    return `<h1>your active listings</h1>
-            <div id='sell'></div>`;
+    return `<div id='sell-page>
+                <div id='create-listing'>
+                    <h1>create listing</h1>
+                    <input type='text' class='product_name' id='product_name placeholder='name'>
+                    <input type='text' class='product_description' id='product-description' placeholder='description'>
+                    <input type='number' class='product_price' id='product_price' placeholder='price'>
+                </div>
+                <div id='view-listing'>
+                    <h1>view listings</h1>
+                </div>                                                                                                                                                                        
+            </div>`;
 }
 
 function getCartPage() {
