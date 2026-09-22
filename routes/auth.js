@@ -63,7 +63,7 @@ router.post('/logout', (req, res) => {
 });
 
 router.get('/verify', authMiddleware, (req, res) => {
-    return res.status(200).json({message: 'successfully verified'});
+    return res.status(200).json({id: req.user.id, email: req.user.email});
 });
 
 module.exports = router;
