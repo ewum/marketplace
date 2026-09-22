@@ -187,6 +187,17 @@ async function loadOrder(id) {
     }
 }
 
+async function loadCart() {
+    try {
+        const res = await fetch('/api/auth/me', {credentials: 'include'});
+        if (!res.ok) {
+            navigate('/login');
+        }
+    } catch (error) {
+        console.log(error);
+    }
+}
+
 async function loadSell() {
     const div = document.getElementById('listings');
     const select = document.getElementById('listing_category');
@@ -194,7 +205,7 @@ async function loadSell() {
         const user_res = await fetch('/api/auth/me', {credentials: 'include'});
         const user = await user_res.json();
         if (!user_res.ok) {
-            navigate('/login')
+            navigate('/login');
             throw new Error('failed to load user');
         }
 
@@ -251,7 +262,7 @@ const routes = {
     '/buy': {page: getBuyPage, init: loadProducts},
     '/product/:id': {page: getProductPage, init: loadProduct},
     '/sell': {page: getSellPage, init: loadSell},
-    '/cart': {page: getCartPage},
+    '/cart': {page: getCartPage, init: loadCart},
     '/orders': {page: getOrdersPage},
     '/orders/:id': {page: getOrderPage, init: loadOrder},
     '/sales': {page: getSalesPage},
