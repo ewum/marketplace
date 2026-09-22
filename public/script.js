@@ -96,9 +96,7 @@ async function loadProducts() {
     try {
         const res = await fetch('/api/products');
 
-        if (!res.ok) {
-            throw new Error('Failed to fetch products');
-        }
+        if (!res.ok) throw new Error('Failed to fetch products');
         
         const products = await res.json();
 
@@ -121,9 +119,7 @@ async function loadProduct(id) {
         const productRes = await fetch('/api/products/' + id);
         const questionsRes = await fetch('/api/questions/' + id);
 
-        if (!productRes) {
-            throw new Error('failed to fetch products');
-        }
+        if (!productRes) throw new Error('failed to fetch products');
 
         const product = await productRes.json();
         const questions = await questionRes.json();
@@ -156,9 +152,7 @@ async function loadOrders() {
     try {
         const res = await fetch('/api/orders', {credentials: 'include'});
 
-        if (!res.ok) {
-            throw new Error('failed to load orders');
-        }
+        if (!res.ok) throw new Error('failed to load orders');
 
         const orders = await res.json();
 
@@ -181,9 +175,7 @@ async function loadOrder(id) {
     try {
         const res = await fetch('/api/order/' + id, {credentials: 'include'});
 
-        if (!res.ok) {
-            throw new Error('failed to load order');
-        }
+        if (!res.ok) throw new Error('failed to load order');
 
         const order = await res.json();
 
@@ -212,9 +204,9 @@ async function loadMyListings() {
 
         const res = await fetch('/api/products/user/' + user.id, {credentials: 'include'});
         const data = await res.json();
-        if (!res.ok) {
-            throw new Error('failed to load listings');            
-        }
+
+        if (!res.ok) throw new Error('failed to load listings');    
+        
         div.innerHTML = data.map(listing => `
             <div class='listing'>
                 <p class='name'>${listing.name}</p>
