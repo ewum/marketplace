@@ -74,19 +74,12 @@ function getUserPage() {
     return `<div id='user'></div>`;
 }
 
-async function loadLogin() {
-    const res = await fetch('/api/auth/me', {credentials: 'include'});
-    if (res.ok) {
-        navigate('/buy');
-        return;
-    }
-}
-
-async function loadRegister() {
-    const res = await fetch('/api/auth/me', {credentials: 'include'});
-    if (res.ok) {
-        navigate('/buy');
-        return;
+async function redirectIfLoggedIn() {
+    try {
+        const res = await fetch('/api/auth/me', {credentials: 'include'});
+        if (res.ok) navigate('/buy');
+    } catch (error) {
+        console.log(error);
     }
 }
 
@@ -201,7 +194,7 @@ async function loadSell() {
     const select = document.getElementById('listing_category');
     try {   
         const categories_res = await fetch('/api/products/categories');
-        const categories = categories_res.json();
+        const categories = await categories_res.json();
         if (!categories_res.ok) throw new Error('failed to load categories');
 
         const user_res = await fetch('/api/auth/me', {credentials: 'include'});
@@ -251,8 +244,8 @@ async function getDropdown() {
 
 const routes = {
     '/': {page: getBuyPage, init: loadProducts},
-    '/login': {page: getLoginPage, init: loadLogin},
-    '/register': {page: getRegisterPage, init: loadRegister},
+    '/login': {page: getLoginPage, init: redirectIfLoggedIn},
+    '/register': {page: getRegisterPage, init: redirectIfLoggedIn},
     '/buy': {page: getBuyPage, init: loadProducts},
     '/product/:id': {page: getProductPage, init: loadProduct},
     '/sell': {page: getSellPage, init: loadSell},
