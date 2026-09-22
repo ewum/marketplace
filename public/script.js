@@ -162,7 +162,7 @@ async function loadOrders() {
                 <p class='quantity'>${order.quantity}</p>
                 <p class='price'>$ ${order.total}</p>
             </div>
-        `);
+        `).join('');
     } catch (error) {
         console.error(error);
         div.innerHTML = '<p>failed to load orders</p>';
@@ -213,9 +213,9 @@ async function loadMyListings() {
                 <p class='description'>${listing.description}</p>
                 <p class='price'>${listing.price}</p>
                 <p class='stock'>${listing.stock}</p>
-                <button class='edit' id='product'>edit</button>
+                <button class='edit' data-id='${listing.id}'>edit</button>
             </div>
-        `);
+        `).join('');
     } catch (error) {
         console.log(error);
         div.innerHTML = '<p>failed to load listings</p>';
