@@ -187,17 +187,6 @@ async function loadOrder(id) {
     }
 }
 
-async function loadCart() {
-    try {
-        const res = await fetch('/api/auth/me', {credentials: 'include'});
-        if (!res.ok) {
-            navigate('/login');
-        }
-    } catch (error) {
-        console.log(error);
-    }
-}
-
 async function loadSell() {
     const div = document.getElementById('listings');
     const select = document.getElementById('listing_category');
@@ -262,7 +251,7 @@ const routes = {
     '/buy': {page: getBuyPage, init: loadProducts},
     '/product/:id': {page: getProductPage, init: loadProduct},
     '/sell': {page: getSellPage, init: loadSell},
-    '/cart': {page: getCartPage, init: loadCart},
+    '/cart': {page: getCartPage},
     '/orders': {page: getOrdersPage},
     '/orders/:id': {page: getOrderPage, init: loadOrder},
     '/sales': {page: getSalesPage},
