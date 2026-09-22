@@ -10,6 +10,13 @@ router.get('/', (req, res) => {
     });
 });
 
+router.get('/categories', (req, res) => {
+    db.query('SELECT * FROM categories', (err, results) => {
+        if (err) return res.status(500).json({error: 'internal server error'});
+        res.json(results);
+    });
+});
+
 router.get('/:product_id', (req, res) => {
     const {product_id} = req.params;
     db.query(
