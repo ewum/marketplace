@@ -20,6 +20,11 @@ CREATE TABLE user_reviews (
     FOREIGN KEY (buyer_id) REFERENCES users(id)
 );
 
+CREATE TABLE categories (
+    id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    name VARCHAR(100) NOT NULL UNIQUE
+);
+
 CREATE TABLE products (
     id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
     seller_id INT NOT NULL,
@@ -56,11 +61,6 @@ CREATE TABLE orders (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP(),
     FOREIGN KEY (buyer_id) REFERENCES users(id),
     FOREIGN KEY (product_id) REFERENCES products(id)
-);
-
-CREATE TABLE categories (
-    id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
-    name VARCHAR(100) NOT NULL UNIQUE
 );
 
 INSERT INTO categories (name) VALUES
