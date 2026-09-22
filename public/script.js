@@ -196,7 +196,7 @@ async function loadOrder(id) {
     }
 }
 
-async function loadMyListings() {
+async function loadSell() {
     const div = document.getElementById('listings');
     try {
         const user_res = await fetch('/api/auth/me', {credentials: 'include'});
@@ -248,7 +248,7 @@ const routes = {
     '/register': {page: getRegisterPage, init: loadRegister},
     '/buy': {page: getBuyPage, init: loadProducts},
     '/product/:id': {page: getProductPage, init: loadProduct},
-    '/sell': {page: getSellPage, init: loadMyListings},
+    '/sell': {page: getSellPage, init: loadSell},
     '/cart': {page: getCartPage},
     '/orders': {page: getOrdersPage},
     '/orders/:id': {page: getOrderPage, init: loadOrder},
