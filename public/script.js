@@ -205,7 +205,12 @@ async function loadMyListings() {
         const res = await fetch('/api/products/user/' + user.id, {credentials: 'include'});
         const data = await res.json();
 
-        if (!res.ok) throw new Error('failed to load listings');    
+        if (!res.ok) throw new Error('failed to load listings');
+
+        if (data.length === 0) {
+            div.innerHTML = `<p>you dont have any listings yet</p>`;
+            return;
+        }
         
         div.innerHTML = data.map(listing => `
             <div class='listing'>
@@ -218,7 +223,7 @@ async function loadMyListings() {
         `).join('');
     } catch (error) {
         console.log(error);
-        div.innerHTML = '<p>failed to load listings</p>';
+        div.innerHTML = `<p>failed to load listings</p>`;
     }
 }
 
