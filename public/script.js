@@ -198,21 +198,28 @@ async function loadOrder(id) {
 
 async function loadSell() {
     const div = document.getElementById('listings');
-    try {
+    const select = document.getElementById('listing_category');
+    try {   
+        const categories_res = await fetch('/api/products/categories');
+        const categories = categories_res.json();
+        if (!categories_res.ok) throw new Error('failed to load categories');
+
         const user_res = await fetch('/api/auth/me', {credentials: 'include'});
         const user = await user_res.json();
+        if (!user_res.ok) throw new Error('failed to load user')
 
-        const res = await fetch('/api/products/user/' + user.id, {credentials: 'include'});
-        const data = await res.json();
+        const products_res = await fetch('/api/products/user/' + user.id);
+        const products = await res.json();
+        if (!products_res.ok) throw new Error('failed to load listings');
 
-        if (!res.ok) throw new Error('failed to load listings');
-
-        if (data.length === 0) {
+        if (products.length === 0) {
             div.innerHTML = `<p>you dont have any listings yet</p>`;
             return;
         }
         
-        div.innerHTML = data.map(listing => `
+        select.innerHTML = categories.map(category => `<option value=${category.id}>${category.name}</option>`).join('');
+
+        div.innerHTML = products.map(listing => `
             <div class='listing'>
                 <p class='name'>${listing.name}</p>
                 <p class='description'>${listing.description}</p>
