@@ -204,10 +204,13 @@ async function loadOrder(id) {
     }
 }
 
-async function loadListings(id) {
+async function loadMyListings() {
     const div = document.getElementById('listings');
     try {
-        const res = await fetch('/api/products/user/' + id, {credentials: 'include'});
+        const user_res = await fetch('/api/auth/me', {credentials: 'include'});
+        const user = await user_res.json();
+
+        const res = await fetch('/api/products/user/' + user.id, {credentials: 'include'});
         const data = await res.json();
         if (!res.ok) {
             throw new Error('failed to load listings');            
@@ -248,7 +251,7 @@ const routes = {
     '/register': {page: getRegisterPage, init: loadRegister},
     '/buy': {page: getBuyPage, init: loadProducts},
     '/product/:id': {page: getProductPage, init: loadProduct},
-    '/sell': {page: getSellPage, init: loadListings},
+    '/sell': {page: getSellPage, init: loadMyListings},
     '/cart': {page: getCartPage},
     '/orders': {page: getOrdersPage},
     '/orders/:id': {page: getOrderPage, init: loadOrder},
