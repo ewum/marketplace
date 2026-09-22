@@ -29,8 +29,8 @@ function getProductPage() {
 }
 
 function getSellPage() { 
-    return `<div id='sell_page'>
-                <div id='create-listing'>
+    return `<div class='sell-page' id='sell-page'>
+                <div class='create' id='create'>
                     <h1>create listing</h1>
                     <input type='text' class='name' id='listing_name' placeholder='name'>
                     <input type='text' class='description' id='listing_description' placeholder='description'>
@@ -39,7 +39,7 @@ function getSellPage() {
                     <select id='listing_category'></select>
                     <button id='create_listing_btn'>create listing</button>
                 </div>
-                <div id='view-listings'>
+                <div class='view' id='view'>
                     <h1>view listings</h1>
                     <div class='listings' id='listings'>
                 </div>                                                                                                                                                                        
