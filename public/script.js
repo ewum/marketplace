@@ -167,9 +167,7 @@ async function loadOrder(id) {
     
     try {
         const res = await fetch('/api/order/' + id, {credentials: 'include'});
-
         if (!res.ok) throw new Error('failed to load order');
-
         const order = await res.json();
 
         div.innerHTML = `
@@ -193,13 +191,17 @@ async function loadSell() {
     const div = document.getElementById('listings');
     const select = document.getElementById('listing_category');
     try {   
+        const user_res = await fetch('/api/auth/me', {credentials: 'include'});
+        const user = await user_res.json();
+        if (!user_res.ok) {
+            navigate('/login')
+            throw new Error('failed to load user');
+        }
+
         const categories_res = await fetch('/api/products/categories');
         const categories = await categories_res.json();
         if (!categories_res.ok) throw new Error('failed to load categories');
 
-        const user_res = await fetch('/api/auth/me', {credentials: 'include'});
-        const user = await user_res.json();
-        if (!user_res.ok) throw new Error('failed to load user')
 
         const products_res = await fetch('/api/products/user/' + user.id);
         const products = await res.json();
