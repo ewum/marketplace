@@ -33,7 +33,7 @@ router.get('/:product_id', (req, res) => {
     );
 });
 
-router.get('/user/user_id', (req, res) => {
+router.get('/user/:user_id', (req, res) => {
     const {user_id} = req.params;
     db.query(
         'SELECT * FROM products WHERE seller_id = ?',
