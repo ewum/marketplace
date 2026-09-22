@@ -75,7 +75,7 @@ function getUserPage() {
 }
 
 async function loadLogin() {
-    const res = await fetch('/api/auth/verify', {credentials: 'include'});
+    const res = await fetch('/api/auth/me', {credentials: 'include'});
     if (res.ok) {
         navigate('/buy');
         return;
@@ -83,7 +83,7 @@ async function loadLogin() {
 }
 
 async function loadRegister() {
-    const res = await fetch('/api/auth/verify', {credentials: 'include'});
+    const res = await fetch('/api/auth/me', {credentials: 'include'});
     if (res.ok) {
         navigate('/buy');
         return;
@@ -228,7 +228,7 @@ async function loadListings(id) {
 }
 
 async function getDropdown() {
-    const res = await fetch('/api/auth/verify', {credentials: 'include'});
+    const res = await fetch('/api/auth/me', {credentials: 'include'});
     if (res.ok) {
         return `
         <a href='/account' data-link>account</a>

@@ -62,7 +62,7 @@ router.post('/logout', (req, res) => {
     res.status(200).json({message: 'logged out successfully'});
 });
 
-router.get('/verify', authMiddleware, (req, res) => {
+router.get('/me', authMiddleware, (req, res) => {
     return res.status(200).json({id: req.user.id, email: req.user.email});
 });
 
