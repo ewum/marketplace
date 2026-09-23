@@ -37,7 +37,7 @@ function getSellPage() {
                     <input type='number' class='stock' id='listing_stock' placeholder='stock'>
                     <input type='number' class='price' id='listing_price' placeholder='price'>
                     <select class='listing_category' id='listing_category'></select>
-                    <input type='file' accept='image/*' class='image' id='listing_image'> 
+                    <input type='file' class='image' id='listing_image' accept='image/*' multiple> 
                     <button id='create_listing_btn'>create</button>
                 </div>
                 <div class='view' id='view'>
