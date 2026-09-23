@@ -37,7 +37,7 @@ function getSellPage() {
                     <input type='number' class='stock' id='listing_stock' placeholder='stock'>
                     <input type='number' class='price' id='listing_price' placeholder='price'>
                     <select class='listing_category' id='listing_category'></select>
-                    <input type='file' class='image' id='listing_image' accept='image/*' multiple> 
+                    <input type='file' class='image' id='listing_images' accept='image/*' multiple> 
                     <button id='create_listing_btn'>create</button>
                 </div>
                 <div class='view' id='view'>
@@ -350,6 +350,30 @@ document.addEventListener('click', async (e) => {
     if (e.target.id == 'logoutbtn') {
         const res = await fetch('/api/auth/logout', {method: 'POST', credentials: 'include'});
         if (res.ok) renderContent();
+    }
+    if (e.target.id == 'create_listing_btn') {
+        const name = document.getElementById('listing_name').value;
+        const description = document.getElementById('listing_description').value;
+        const stock = document.getElementById('listing_stock').value;
+        const price = document.getElementById('listing_price').value;
+        const images = document.getElementById('listing_images').value;
+        const category = document.getElementById('listing_category').value;
+
+        const formData = new FormData();
+        formData.append('name', name);
+        formData.append('description', description);
+        formData.append('stock', stock);
+        formData.append('price', price);
+        formData.append('category', category);
+        for (const image of images) {
+            formData.append('images', file);
+        }
+
+        const res = await fetch('/api/products/create', {
+            credentials: 'include',
+            method: 'POST',
+            body: formData
+        });
     }
 });
 
