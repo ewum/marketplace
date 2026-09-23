@@ -55,7 +55,18 @@ router.post('/create', authMiddleware, upload.array('images'), (req, res) => {
         [name, description, price, stock, category_id],
         (err, result) => {
             if (err) return res.status(500).json({error: 'internal server error'});
-            res.status(201).json({id: result.insertId});
+            const product_id = result.insertId;
+            const imageinserts = req.files.map(file =>
+                [product_id, '/uploads/' + file.filename]
+            );
+            db.query(
+                'INSERT INTO product_images(product_id, image_url) VALUES ?',
+                [imageinserts],
+                (err, result) => {
+                    if (err) return res.status(500).json({error: 'internal server error'});
+                    res.status(201).json({id: result.insertId});
+                }
+            );
         }
     );
 });
