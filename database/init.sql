@@ -6,6 +6,7 @@ CREATE TABLE users (
     city VARCHAR(150),
     state VARCHAR(150),
     country VARCHAR(150),
+    image_url VARCHAR(255),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP()
 );
 
