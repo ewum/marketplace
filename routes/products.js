@@ -49,6 +49,7 @@ router.get('/user/:user_id', (req, res) => {
 
 router.post('/create', authMiddleware, upload.array('images'), (req, res) => {
     const {name, description, stock, price, category_id} = req.body;
+    if (!req.files || req.files.length === 0) return res.status(400).json({error: 'at least one image is required'});
     db.query( 
         `INSERT INTO products(seller_id, category_id, name, description, stock, price)
         VALUES (?, ?, ?, ?, ?, ?)`,
