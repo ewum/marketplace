@@ -36,7 +36,7 @@ function getSellPage() {
                     <input type='text' class='description' id='listing_description' placeholder='description'>
                     <input type='number' class='stock' id='listing_stock' placeholder='stock'>
                     <input type='number' class='price' id='listing_price' placeholder='price'>
-                    <select id='listing_category'></select>
+                    <select class='listing_category' id='listing_category'></select>
                     <input type='file' accept='image/*' class='image' id='listing_image'> 
                     <button id='create_listing_btn'>create</button>
                 </div>
@@ -206,13 +206,15 @@ async function loadSell() {
         const products_res = await fetch('/api/products/user/' + user.id);
         const products = await products_res.json();
         if (!products_res.ok) throw new Error('failed to load listings');
+        
+        select.innerHTML = categories.map(category => `
+            <option value='${category.id}'>${category.name}</option>
+        `).join('');
 
         if (products.length === 0) {
             div.innerHTML = `<p>you dont have any listings yet</p>`;
             return;
         }
-        
-        select.innerHTML = categories.map(category => `<option value=${category.id}>${category.name}</option>`).join('');
 
         div.innerHTML = products.map(listing => `
             <div class='listing'>
