@@ -364,7 +364,7 @@ document.addEventListener('click', async (e) => {
         formData.append('description', description);
         formData.append('stock', stock);
         formData.append('price', price);
-        formData.append('category', category);
+        formData.append('category_id', category);
         for (const file of imagefiles) {
             formData.append('images', file);
         }
