@@ -47,12 +47,12 @@ router.get('/user/:user_id', (req, res) => {
     );
 });
 
-router.post('/create', authMiddleware, (req, res) => {
-    const {name, description, price, stock} = req.body;
-    db.query(
-        `INSERT INTO products(category_id, name, description, price, stock)
+router.post('/create', authMiddleware, upload.array('images'), (req, res) => {
+    const {name, description, price, stock, category_id} = req.body;
+    db.query( 
+        `INSERT INTO products(name, description, price, stock, category_id)
         VALUES (?, ?, ?, ?, ?)`,
-        [name, description, price, stock],
+        [name, description, price, stock, category_id],
         (err, result) => {
             if (err) return res.status(500).json({error: 'internal server error'});
             res.status(201).json({id: result.insertId});
