@@ -203,9 +203,8 @@ async function loadSell() {
         const categories = await categories_res.json();
         if (!categories_res.ok) throw new Error('failed to load categories');
 
-
         const products_res = await fetch('/api/products/user/' + user.id);
-        const products = await res.json();
+        const products = await products_res.json();
         if (!products_res.ok) throw new Error('failed to load listings');
 
         if (products.length === 0) {
