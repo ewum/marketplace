@@ -38,6 +38,13 @@ CREATE TABLE products (
     FOREIGN KEY (category_id) REFERENCES categories(id)
 );
 
+CREATE TABLE product_images (
+    id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    product_id INT NOT NULL,
+    image_url VARCHAR(255) NOT NULL,
+    FOREIGN KEY (product_id) REFERENCES products(id)
+);
+
 CREATE TABLE product_questions (
     id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
     asker_id INT NOT NULL,
