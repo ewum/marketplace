@@ -356,7 +356,7 @@ document.addEventListener('click', async (e) => {
         const description = document.getElementById('listing_description').value;
         const stock = document.getElementById('listing_stock').value;
         const price = document.getElementById('listing_price').value;
-        const imagefiles = document.getElementById('listing_images').value;
+        const imagefiles = document.getElementById('listing_images').files;
         const category = document.getElementById('listing_category').value;
 
         const formData = new FormData();
