@@ -29,7 +29,7 @@ function getProductPage() {
 }
 
 function getSellPage() { 
-    return `<div class='sell-page' id='sell-page'>
+    return `<div class='sell'>
                 <div class='create' id='create'>
                     <h1>create listing</h1>
                     <input type='text' class='name' id='listing_name' placeholder='name'>
