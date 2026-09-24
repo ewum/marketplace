@@ -6,8 +6,27 @@ const db = require('../db');
 const authMiddleware = require('../middlewares/authmiddleware');
 
 router.get('/', (req, res) => {
-    db.query('SELECT * FROM products', (err, results) => {
-        if (err) return res.status(500).json({error: 'internal server error'});
+    const page = parseInt(req.query.page) || 1;
+    const limit = 40;
+    const offset = (page - 1) * limit;
+    const search = req.query.search;
+
+    let sql = 'SELECT * FROM products';
+    let params = [];
+    
+    if (search) {
+        sql += ' WHERE name LIKE ?';
+        params.push('%' + search + '%');
+    }
+
+    sql += ' LIMIT ? OFFESET ?';
+    params.push(limit, offset);
+
+    db.query(sql, params, (err, results) => {
+        if (err) {
+            console.error(err);
+            return res.status(500).json({error: 'internal server error'})''
+        }
         res.json(results);
     });
 });
