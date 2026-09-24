@@ -19,7 +19,7 @@ router.get('/', (req, res) => {
         params.push('%' + search + '%');
     }
 
-    sql += ' LIMIT ? OFFESET ?';
+    sql += ' LIMIT ? OFFSET ?';
     params.push(limit, offset);
 
     db.query(sql, params, (err, results) => {
