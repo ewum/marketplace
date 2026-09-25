@@ -25,7 +25,7 @@ router.get('/', (req, res) => {
     db.query(sql, params, (err, results) => {
         if (err) {
             console.error(err);
-            return res.status(500).json({error: 'internal server error'})''
+            return res.status(500).json({error: 'internal server error'});
         }
         res.json(results);
     });
