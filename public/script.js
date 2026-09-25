@@ -377,5 +377,12 @@ document.addEventListener('click', async (e) => {
     }
 });
 
+document.addEventListener('keydown', (e) => {
+    if (e.key == 'enter' && e.target.id == 'search') {
+        const query = e.target.value;
+        navigate('/buy?search=' + encodeURIComponent(query) + '?page=1');
+    }
+});
+
 window.addEventListener('popstate', renderContent);
 window.addEventListener('load', renderContent);
