@@ -79,9 +79,7 @@ async function redirectIfLoggedIn() {
     try {
         const res = await fetch('/api/auth/me', {credentials: 'include'});
         if (res.ok) navigate('/buy');
-    } catch (error) {
-        console.log(error);
-    }
+    } catch (error) {}
 }
 
 async function loadProducts() {
@@ -101,7 +99,6 @@ async function loadProducts() {
             </div>
         `).join('');
     } catch (error) {
-        console.error(error);
         div.innerHTML = '<p>failed to load products</p>'
     }
 }
@@ -135,7 +132,6 @@ async function loadProduct(id) {
             `).join('')};
         `;
     } catch (error) {
-        console.error(error);
         div.innerHTML = '<p>failed to load product</p>';    
     }
 }
@@ -158,7 +154,6 @@ async function loadOrders() {
             </div>
         `).join('');
     } catch (error) {
-        console.error(error);
         div.innerHTML = '<p>failed to load orders</p>';
     }
 }
@@ -183,7 +178,6 @@ async function loadOrder(id) {
             <a class='seller' href='/users/${order.seller_id}'>${order.seller_name}</a>
         `;
     } catch (error) {
-        console.log(error);
         div.innerHTML = '<p>failed to load order</p>';
     }
 }
@@ -226,7 +220,6 @@ async function loadSell() {
             </div>
         `).join('');
     } catch (error) {
-        console.log(error);
         div.innerHTML = `<p>failed to load listings</p>`;
     }
 }
@@ -378,7 +371,7 @@ document.addEventListener('click', async (e) => {
 });
 
 document.addEventListener('keydown', (e) => {
-    if (e.key == 'enter' && e.target.id == 'search') {
+    if (e.key == 'Enter' && e.target.id == 'search') {
         const query = e.target.value;
         navigate('/buy?search=' + encodeURIComponent(query) + '?page=1');
     }
