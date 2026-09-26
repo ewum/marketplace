@@ -44,7 +44,7 @@ router.get('/:id', (req, res) => {
         `SELECT p.*, seller.name AS seller_name
         FROM products p 
         JOIN users seller ON p.seller_id = seller.id
-        WHERE id = ?`,
+        WHERE p.id = ?`,
         [id],
         (err, results) => {
             if (err) {
