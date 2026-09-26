@@ -38,14 +38,14 @@ router.get('/categories', (req, res) => {
     });
 });
 
-router.get('/:product_id', (req, res) => {
-    const {product_id} = req.params;
+router.get('/:id', (req, res) => {
+    const {id} = req.params;
     db.query(
         `SELECT p.*, seller.name AS seller_name
         FROM products p 
         JOIN users seller ON p.seller_id = seller.id
         WHERE id = ?`,
-        [product_id],
+        [id],
         (err, results) => {
             if (err) return res.status(500).json({error: 'internal server error'});
             if (results.length == 0) return res.status(404).json({error: 'product not found'});
