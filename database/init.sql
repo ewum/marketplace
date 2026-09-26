@@ -42,6 +42,7 @@ CREATE TABLE products (
 CREATE TABLE product_images (
     id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
     product_id INT NOT NULL,
+    order_number INT NOT NULL,
     image_url VARCHAR(255) NOT NULL,
     FOREIGN KEY (product_id) REFERENCES products(id)
 );

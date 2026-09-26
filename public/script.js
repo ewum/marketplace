@@ -96,10 +96,10 @@ async function loadProducts() {
         const products = await res.json();
 
         div.innerHTML = products.map(product => `
-            <div class='product'>
+            <a href='/product/${product.id}' class='product'>
                 <h2 class='name'>${product.name}</h2>
                 <p class='price'>R$ ${product.price}</p>
-            </div>
+            </a>
         `).join('');
     } catch (error) {
         div.innerHTML = '<p>failed to load products</p>'
@@ -124,10 +124,10 @@ async function loadProduct(id) {
             <p class='price'>$ ${product.price}</p>
             <p class='stock'>${product.stock}</p>
             <p class='created_at'>${product.created_at}</p>
-            <a class='seller' href='users/${product.seller_id}'>${product.seller_name}</a>
+            <a class='seller' href='user/${product.seller_id}'>${product.seller_name}</a>
             <h2 class='questions'>questions</h2>
             ${questions.map(question => `
-                <a class='asker' href='/users/${question.asker_id}'>${question.asker_name}</a>
+                <a class='asker' href='/user/${question.asker_id}'>${question.asker_name}</a>
                 <p class='question'>${question.question}</p>
                 <p class='answer'>${question.answer}</p>
                 <p class='created_at'>${question.created_at}</p>
@@ -150,11 +150,11 @@ async function loadOrders() {
         const orders = await res.json();
 
         div.innerHTML = orders.map(order => `
-            <div class='order'>
+            <a href='/order/${order.id}' class='order'>
                 <p class='product_name'>${order.product_name}</p>
                 <p class='quantity'>${order.quantity}</p>
                 <p class='price'>$ ${order.total}</p>
-            </div>
+            </a>
         `).join('');
     } catch (error) {
         div.innerHTML = '<p>failed to load orders</p>';
@@ -214,13 +214,13 @@ async function loadSell() {
         }
 
         div.innerHTML = products.map(listing => `
-            <div class='listing'>
+            <a href='/product/${listing.id}' class='listing'>
                 <p class='name'>${listing.name}</p>
                 <p class='description'>${listing.description}</p>
                 <p class='price'>${listing.price}</p>
                 <p class='stock'>${listing.stock}</p>
                 <button class='edit' data-id='${listing.id}'>edit</button>
-            </div>
+            </a>
         `).join('');
     } catch (error) {
         div.innerHTML = `<p>failed to load listings</p>`;
