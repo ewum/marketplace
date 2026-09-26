@@ -84,9 +84,12 @@ async function redirectIfLoggedIn() {
 
 async function loadProducts() {
     const div = document.getElementById('products');
+    const params = new URLSearchParams(window.location.search);
+    const search = params.get('search') || '';
+    const page = params.get('page') || 1;
 
     try {
-        const res = await fetch('/api/products');
+        const res = await fetch(`/api/products?search=${encodeURIComponent(search)}&page=${page}`);
 
         if (!res.ok) throw new Error('Failed to fetch products');
         
