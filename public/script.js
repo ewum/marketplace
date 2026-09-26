@@ -216,9 +216,8 @@ async function loadSell() {
         div.innerHTML = products.map(listing => `
             <a href='/product/${listing.id}' class='listing'>
                 <p class='name'>${listing.name}</p>
-                <p class='description'>${listing.description}</p>
-                <p class='price'>${listing.price}</p>
                 <p class='stock'>${listing.stock}</p>
+                <p class='price'>${listing.price}</p>
                 <button class='edit' data-id='${listing.id}'>edit</button>
             </a>
         `).join('');
