@@ -47,7 +47,10 @@ router.get('/:id', (req, res) => {
         WHERE id = ?`,
         [id],
         (err, results) => {
-            if (err) return res.status(500).json({error: 'internal server error'});
+            if (err) {
+                console.error(err);
+                return res.status(500).json({error: 'internal server error'});
+            }
             if (results.length == 0) return res.status(404).json({error: 'product not found'});
             res.json(results[0]);
         }
