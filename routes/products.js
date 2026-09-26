@@ -91,4 +91,23 @@ router.post('/create', authMiddleware, upload.array('images'), (req, res) => {
     );
 });
 
+router.patch('/:id/edit', authMiddleware, upload.array('images'), (req, res) => {
+    const {id} = req.params;
+    const {name, description, stock, price, category_id} = req.body;
+    if (!req.files || req.files.length === 0) return res.status(400).json({error: 'at least one image is required'});
+    db.query(
+        `UPDATE products
+        SET name = ?, description = ?, stock = ?, price = ?, category_id = ?
+        WHERE id = ? AND seller_id = ?`,
+        [name, description, stock, price, category_id, id, req.user.id],
+        (err, result) => {
+            if (err) {
+                console.error(err);
+                return res.status(500).json({error: 'internal server error'});
+            }
+            res.status(201).json({id: id});
+        }
+    );
+});
+
 module.exports = router;
