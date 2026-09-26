@@ -96,7 +96,7 @@ async function loadProducts() {
         const products = await res.json();
 
         div.innerHTML = products.map(product => `
-            <a href='/product/${product.id}' class='product'>
+            <a href='/product/${product.id}' class='product' data-link>
                 <h2 class='name'>${product.name}</h2>
                 <p class='price'>R$ ${product.price}</p>
             </a>
@@ -150,7 +150,7 @@ async function loadOrders() {
         const orders = await res.json();
 
         div.innerHTML = orders.map(order => `
-            <a href='/order/${order.id}' class='order'>
+            <a href='/order/${order.id}' class='order' data-link>
                 <p class='product_name'>${order.product_name}</p>
                 <p class='quantity'>${order.quantity}</p>
                 <p class='price'>$ ${order.total}</p>
@@ -214,7 +214,7 @@ async function loadSell() {
         }
 
         div.innerHTML = products.map(listing => `
-            <a href='/product/${listing.id}' class='listing'>
+            <a href='/product/${listing.id}' class='listing' data-link>
                 <p class='name'>${listing.name}</p>
                 <p class='stock'>${listing.stock}</p>
                 <p class='price'>${listing.price}</p>
