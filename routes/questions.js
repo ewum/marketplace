@@ -32,13 +32,13 @@ router.post('/:product_id/ask', (req, res) => {
     );
 });
 
-router.patch('/:question_id/answer', authMiddleware, (req, res) => {
-    const {question_id} = req.params;
+router.patch('/:id/answer', authMiddleware, (req, res) => {
+    const {id} = req.params;
     db.query(
         `UPDATE product_questions
         SET answer = ?
         WHERE id = ? AND seller_id = ?`,
-        [req.body.answer, question_id, req.user.id],
+        [req.body.answer, id, req.user.id],
         (err, result) => {
             if (err) return res.status(500).json({error: 'internal server error'});
             if (result.affectedRows === 0) return res.status(404).json({error: 'review not found'});
@@ -47,13 +47,13 @@ router.patch('/:question_id/answer', authMiddleware, (req, res) => {
     );
 });
 
-router.delete('/:question_id/delete', authMiddleware, (req, res) => {
-    const {question_id} = req.params;
+router.delete('/:id/delete', authMiddleware, (req, res) => {
+    const {id} = req.params;
     db.query(
         `DELETE FROM product_questions q
         JOIN products p ON q.product_id = p.id
         WHERE q.id = ? AND p.seller_id = ?`,
-        [question_id, req.user.id],
+        [id, req.user.id],
         (err, result) => {
             if (err) return res.status(500).json({error: 'internal server error'});
             if (result.affectedRows === 0) return res.status(404).json({error: 'question not found'});
