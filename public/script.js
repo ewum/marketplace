@@ -124,10 +124,10 @@ async function loadProduct(id) {
             <p class='price'>$ ${product.price}</p>
             <p class='stock'>${product.stock}</p>
             <p class='created_at'>${product.created_at}</p>
-            <a class='seller' href='user/${product.seller_id}'>${product.seller_name}</a>
+            <a class='seller' href='users/${product.seller_id}'>${product.seller_name}</a>
             <h2 class='questions'>questions</h2>
             ${questions.map(question => `
-                <a class='asker' href='/user/${question.asker_id}'>${question.asker_name}</a>
+                <a class='asker' href='/users/${question.asker_id}'>${question.asker_name}</a>
                 <p class='question'>${question.question}</p>
                 <p class='answer'>${question.answer}</p>
                 <p class='created_at'>${question.created_at}</p>
@@ -252,7 +252,7 @@ const routes = {
     '/orders': {page: getOrdersPage},
     '/orders/:id': {page: getOrderPage, init: loadOrder},
     '/sales': {page: getSalesPage},
-    '/user/:id': {page: getUserPage},
+    '/users/:id': {page: getUserPage},
     '/account': {page: getAccountPage}
 };
 
@@ -369,6 +369,8 @@ document.addEventListener('click', async (e) => {
             method: 'POST',
             body: formData
         });
+        
+        renderContent();
     }
 });
 
