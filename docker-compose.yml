@@ -8,11 +8,11 @@ services:
       - /app/node_modules
       - uploads_data:/app/public/uploads
     environment:
-      - DB_HOST=db
-      - DB_USER=root
-      - DB_PASSWORD=1234
-      - DB_NAME=mydb
-      - JWT_SECRET=1234
+      - DB_HOST=${DB_HOST}
+      - DB_USER=${DB_USER}
+      - DB_PASSWORD=${DB_PASSWORD}
+      - DB_NAME=${DB_NAME}
+      - JWT_SECRET=${JWT_SECRET}
     depends_on:
       db:
         condition: service_healthy
@@ -20,8 +20,8 @@ services:
   db:
     image: mysql:8
     environment:
-      - MYSQL_ROOT_PASSWORD=1234
-      - MYSQL_DATABASE=mydb
+      - MYSQL_ROOT_PASSWORD=${DB_PASSWORD}
+      - MYSQL_DATABASE=${DB_NAME}
     ports:
       - "3306:3306"
     volumes:

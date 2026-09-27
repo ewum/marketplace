@@ -298,8 +298,9 @@ function navigate(path) {
 }
 
 document.addEventListener('click', async (e) => {
-    if (e.target.matches('a[data-link]')) {
-        e.preventDefault();
+    const link = e.target.closest('a[data-link]');
+    if (link) {
+        e.preventDefault(); 
         navigate(e.target.getAttribute('href'));
     }
     if (e.target.id == 'loginbtn') {
