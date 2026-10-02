@@ -116,7 +116,7 @@ async function loadProduct(id) {
         if (!productRes) throw new Error('failed to fetch products');
 
         const product = await productRes.json();
-        const questions = await questionRes.json();
+        const questions = await questionsRes.json();
 
         div.innerHTML = `
             <h2>${product.name}</h2>
@@ -135,6 +135,7 @@ async function loadProduct(id) {
             `).join('')}
         `;
     } catch (error) {
+        console.log(error);
         div.innerHTML = '<p>failed to load product</p>';    
     }
 }
