@@ -309,6 +309,7 @@ document.addEventListener('click', async (e) => {
     if (link) {
         e.preventDefault(); 
         navigate(e.target.getAttribute('href'));
+        return;
     }
     if (e.target.id == 'loginbtn') {
         const email = document.getElementById('login_email').value;
@@ -326,6 +327,7 @@ document.addEventListener('click', async (e) => {
             return;
         }
         navigate('/buy');
+        return;
     }
     if (e.target.id == 'registerbtn') {
         const name = document.getElementById('register_name').value;
@@ -349,10 +351,12 @@ document.addEventListener('click', async (e) => {
             return;
         }
         navigate('/buy');
+        return;
     }
     if (e.target.id == 'logoutbtn') {
         const res = await fetch('/api/auth/logout', {method: 'POST', credentials: 'include'});
         if (res.ok) renderContent();
+        return;
     }
     if (e.target.id == 'create_listing_btn') {
         const name = document.getElementById('listing_name').value;
@@ -379,6 +383,7 @@ document.addEventListener('click', async (e) => {
         });
         
         renderContent();
+        return;
     }
 });
 
