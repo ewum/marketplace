@@ -132,7 +132,7 @@ async function loadProduct(id) {
                 <p class='answer'>${question.answer}</p>
                 <p class='created_at'>${question.created_at}</p>
                 <p class='answered_at'>${question.answered_at}</p>
-            `).join('')};
+            `).join('')}
         `;
     } catch (error) {
         div.innerHTML = '<p>failed to load product</p>';    
@@ -298,6 +298,13 @@ function navigate(path) {
 }
 
 document.addEventListener('click', async (e) => {
+    const editBtn = e.target.closest('.edit');
+    if (editBtn) {
+        e.preventDefault();
+        e.stopPropagation();
+        navigate('/product/' + editBtn.dataset.id + '/edit');
+        return;
+    }
     const link = e.target.closest('a[data-link]');
     if (link) {
         e.preventDefault(); 
