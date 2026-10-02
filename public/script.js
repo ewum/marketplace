@@ -308,7 +308,7 @@ document.addEventListener('click', async (e) => {
     const link = e.target.closest('a[data-link]');
     if (link) {
         e.preventDefault(); 
-        navigate(e.target.getAttribute('href'));
+        navigate(link.getAttribute('href'));
         return;
     }
     if (e.target.id == 'loginbtn') {
