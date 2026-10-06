@@ -113,4 +113,8 @@ router.patch('/:id/edit', authMiddleware, upload.array('images'), (req, res) => 
     );
 });
 
+router.delete('/:id/delete', authMiddleware, (req, res) => {
+
+});
+
 module.exports = router;
