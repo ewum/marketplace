@@ -389,9 +389,9 @@ document.addEventListener('click', async (e) => {
 });
 
 document.addEventListener('keydown', (e) => {
-    if (e.key == 'Enter' && e.target.id == 'search') {
+    if (e.key === 'Enter' && e.target.id === 'search') {
         const query = e.target.value;
-        navigate('/buy?search=' + encodeURIComponent(query) + '?page=1');
+        navigate('/buy?search=' + encodeURIComponent(query) + '&page=1');
     }
 });
 
