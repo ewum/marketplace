@@ -114,7 +114,20 @@ router.patch('/:id/edit', authMiddleware, upload.array('images'), (req, res) => 
 });
 
 router.delete('/:id/delete', authMiddleware, (req, res) => {
-
+    const {id} = req.params;
+    db.query(
+        `DELETE FROM products
+        WHERE id = ? AND seller_id = ?
+            AND NOT EXISTS (SELECT 1 FROM orders WHERE product_id = id)`,
+        [id, req.user.id],
+        (err, result) => {
+            if (err) {
+                console.error(err);
+                return res.status(500).json({error: 'internal server error'});
+            }
+            res.status(204).json({message: 'product deleted'});
+        }
+    );
 });
 
 module.exports = router;
