@@ -44,16 +44,36 @@ router.patch('/:id', authMiddleware, upload.array('images'), (req, res) => {
 });
 
 router.delete('/:id', authMiddleware, (req, res) => {
-	const {url_id} = req.params;
-	const user_id = req.user.id
-	if (url_id )
+	const {id} = req.params;
+	if (Number(id) !== req.user.id) {
+		return res.status(403).json({error: 'unathorized action'});
+	}
 	db.query(
-		`SELECT 1
-		FROM orders o
+		`SELECT 1 FROM orders o
 		JOIN products p ON o.product_id = p.id
 		WHERE p.seller_id = ?`,
-		[]
-	)
-})
+		[id],
+		(err, results) => {
+			if (err) {
+				console.log(err);
+				return res.status(500).json({error: 'internal server error'});
+			}
+			if (results.length > 0) {
+				return res.status(403).json({error: 'account has sales'})
+			}
+		}
+	);
+	db.query(
+		`DELETE FROM users WHERE id = ?`,
+		[id],
+		(err, result) => {
+			if (err) {
+				console.error(err);
+				return res.status(500).json({error: 'internal server error'});
+			}
+			res.status(204).json({error: 'successfully deleted your account'});
+		}
+	);
+})l
 
 module.exports = router;
