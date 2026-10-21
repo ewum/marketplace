@@ -24,16 +24,15 @@ router.get('/:id', (req, res) => {
 
 router.patch('/:id', authMiddleware, upload.array('images'), (req, res) => {
 	const {country, state, city, image_url} = req.body;
-	const {url_id} = req.params;
-	const user_id = req.user.id;
-	if (Number(url_id) !== user_id) {
+	const {id} = req.params;
+	if (Number(id) !== req.user.id) {
 		return res.status(403).json({error: 'unauthorized action'});
 	}
 	db.query(
 		`UPDATE users
 		SET country = ?, state = ?, city = ?, image_url = ?
 		WHERE id = ?`,
-		[country, state, city, image_url, user_id],
+		[country, state, city, image_url, id],
 		(err, result) => {
 			if (err) {
 				console.error(err);
