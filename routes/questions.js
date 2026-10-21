@@ -47,7 +47,7 @@ router.patch('/:id/answer', authMiddleware, (req, res) => {
     );
 });
 
-router.delete('/:id/delete', authMiddleware, (req, res) => {
+router.delete('/:id', authMiddleware, (req, res) => {
     const {id} = req.params;
     db.query(
         `DELETE FROM product_questions q

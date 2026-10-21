@@ -69,7 +69,7 @@ router.get('/user/:user_id', (req, res) => {
     );
 });
 
-router.post('/create', authMiddleware, upload.array('images'), (req, res) => {
+router.post('/', authMiddleware, upload.array('images'), (req, res) => {
     const {name, description, stock, price, category_id} = req.body;
     if (!req.files || req.files.length === 0) return res.status(400).json({error: 'at least one image is required'});
     db.query( 
@@ -94,7 +94,7 @@ router.post('/create', authMiddleware, upload.array('images'), (req, res) => {
     );
 });
 
-router.patch('/:id/edit', authMiddleware, upload.array('images'), (req, res) => {
+router.patch('/:id', authMiddleware, upload.array('images'), (req, res) => {
     const {id} = req.params;
     const {name, description, stock, price, category_id} = req.body;
     if (!req.files || req.files.length === 0) return res.status(400).json({error: 'at least one image is required'});
@@ -113,7 +113,7 @@ router.patch('/:id/edit', authMiddleware, upload.array('images'), (req, res) => 
     );
 });
 
-router.delete('/:id/delete', authMiddleware, (req, res) => {
+router.delete('/:id', authMiddleware, (req, res) => {
     const {id} = req.params;
     db.query(
         `DELETE FROM products

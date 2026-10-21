@@ -18,7 +18,7 @@ router.get('/:user_id', (req, res) => {
 	);
 });
 
-router.post('/:seller_id/rate', authMiddleware, (req, res) => {
+router.post('/:seller_id', authMiddleware, (req, res) => {
 	const {seller_id} = req.params;
 	db.query(
 		`INSERT INTO user_reviews (seller_id, buyer_id, rating, comment)
