@@ -125,7 +125,7 @@ router.delete('/:id/delete', authMiddleware, (req, res) => {
                 console.error(err);
                 return res.status(500).json({error: 'internal server error'});
             }
-            res.status(204).json({message: 'product deleted'});
+            res.status(204).json({message: 'product deleted successfully'});
         }
     );
 });
