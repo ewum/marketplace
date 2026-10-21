@@ -22,7 +22,7 @@ router.get('/:id', (req, res) => {
 	);
 });
 
-router.patch('/:id/edit', authMiddleware, upload.array('images'), (req, res) => {
+router.patch('/:id', authMiddleware, upload.array('images'), (req, res) => {
 	const {country, state, city, image_url} = req.body;
 	const {url_id} = req.params;
 	const user_id = req.user.id;
@@ -44,7 +44,7 @@ router.patch('/:id/edit', authMiddleware, upload.array('images'), (req, res) => 
 	);
 });
 
-router.delete('/:id/delete', authMiddleware, (req, res) => {
+router.delete('/:id', authMiddleware, (req, res) => {
 	const {url_id} = req.params;
 	const user_id = req.user.id
 	if (url_id )
