@@ -26,8 +26,8 @@ router.patch('/:id/edit', authMiddleware, upload.array('images'), (req, res) => 
 	const {country, state, city, image_url} = req.body;
 	const {url_id} = req.params;
 	const user_id = req.user.id;
-	if (url_id != user_id) {
-		return res.status(400).json({error: 'unauthorized action'});
+	if (Number(url_id) !== user_id) {
+		return res.status(403).json({error: 'unauthorized action'});
 	}
 	db.query(
 		`UPDATE users
@@ -43,5 +43,18 @@ router.patch('/:id/edit', authMiddleware, upload.array('images'), (req, res) => 
 		}
 	);
 });
+
+router.delete('/:id/delete', authMiddleware, (req, res) => {
+	const {url_id} = req.params;
+	const user_id = req.user.id
+	if (url_id )
+	db.query(
+		`SELECT 1
+		FROM orders o
+		JOIN products p ON o.product_id = p.id
+		WHERE p.seller_id = ?`,
+		[]
+	)
+})
 
 module.exports = router;
