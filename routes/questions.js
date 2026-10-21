@@ -18,7 +18,7 @@ router.get('/:product_id', (req, res) => {
     );
 });
 
-router.post('/:product_id/ask', (req, res) => {
+router.post('/:product_id', (req, res) => {
     const {product_id} = req.params;
     const {asker_id, question} = req.body;
     db.query(
@@ -32,7 +32,7 @@ router.post('/:product_id/ask', (req, res) => {
     );
 });
 
-router.patch('/:id/answer', authMiddleware, (req, res) => {
+router.patch('/:id', authMiddleware, (req, res) => {
     const {id} = req.params;
     db.query(
         `UPDATE product_questions
