@@ -26,7 +26,7 @@ router.patch('/:id', authMiddleware, upload.array('images'), (req, res) => {
 	const {country, state, city, image_url} = req.body;
 	const {id} = req.params;
 	if (Number(id) !== req.user.id) {
-		return res.status(403).json({error: 'unauthorized action'});
+		return res.status(403).json({error: 'unallowed action'});
 	}
 	db.query(
 		`UPDATE users
@@ -46,7 +46,7 @@ router.patch('/:id', authMiddleware, upload.array('images'), (req, res) => {
 router.delete('/:id', authMiddleware, (req, res) => {
 	const {id} = req.params;
 	if (Number(id) !== req.user.id) {
-		return res.status(403).json({error: 'unathorized action'});
+		return res.status(403).json({error: 'unallowed action'});
 	}
 	db.query(
 		`SELECT 1 FROM orders o
