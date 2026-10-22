@@ -62,14 +62,20 @@ CREATE TABLE product_questions (
 CREATE TABLE orders (
     id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
     buyer_id INT NOT NULL,
+    total DECIMAL(10, 2) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP(),
+);
+
+CREATE TABLE order_items (
+    id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    order_id INT NOT NULL,
     product_id INT NOT NULL,
     quantity INT NOT NULL,
     shipping DECIMAL(10, 2) NOT NULL,
-    total DECIMAL(10, 2) NOT NULL,
+    unit_price DECIMAL(10, 2) NOT NULL,
     status ENUM('pending', 'paid', 'shipped', 'delivered', 'cancelled') DEFAULT 'pending' NOT NULL,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP(),
-    FOREIGN KEY (buyer_id) REFERENCES users(id),
-    FOREIGN KEY (product_id) REFERENCES products(id)
+    FOREIGN KEY (product_id) REFERENCES products(id),
+    FOREIGN KEY (order_id) REFERENCES orders(id)
 );
 
 INSERT INTO categories (name) VALUES
