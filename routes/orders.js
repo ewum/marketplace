@@ -5,13 +5,18 @@ const authMiddleware = require('../middlewares/authmiddleware');
 
 router.get('/', authMiddleware, (req, res) => {
     db.query(
-        `SELECT p.name, o.quantity, o.total, o.status, o.created_at
+        `SELECT o.id, o.total, o.created_at, SUM(i.quantity) AS quantity, GROUP_CONCAT(p.name SEPARATOR ', ') AS products
         FROM orders o
-        JOIN products p ON o.product_id = p.id
-        WHERE o.buyer_id = ?`,
+        JOIN order_items i ON o.id = i.order_id
+        JOIN products p ON p.id = i.product_id
+        WHERE o.buyer_id = ?
+        GROUP BY o.id, o.total, o.created_at`,
         [req.user.id],
         (err, results) => {
-            if (err) return res.status(500).json({error: 'internal server error'});
+            if (err) {
+                console.error(err);
+                return res.status(500).json({error: 'internal server error'});
+            }
             res.json(results);
         }
     );
@@ -20,15 +25,17 @@ router.get('/', authMiddleware, (req, res) => {
 router.get('/:id', authMiddleware, (req, res) => {
     const {id} = req.params;
     db.query(
-        `SELECT p.name AS product_name, p.price AS product_price, seller.id AS seller_id, seller.name AS seller_name, o.quantity, o.total, o.status, o.shipping, o.created_at
-        FROM orders o
-        JOIN products p ON o.product_id = p.id
-        JOIN users seller ON p.seller_id = seller.id
+        `SELECT p.id, p.name, p.image_url, i.quantity, i.unit_price, i.status
+        FROM order_items i
+        JOIN products p ON i.product_id = p.id
+        JOIN orders o ON o.id = i.order_id
         WHERE o.id = ? AND o.buyer_id = ?`,
-        [id, req.user.id],
+        [req.user.id],
         (err, results) => {
-            if (err) return res.status(500).json({error: 'internal server error'});
-            if (results.length == 0) return res.status(404).json({error: 'order not found'});
+            if (err) {
+                console.error(err);
+                return res.status(500).json({error: 'internal server error'});
+            }
             res.json(results);
         }
     );
