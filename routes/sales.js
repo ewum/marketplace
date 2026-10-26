@@ -5,7 +5,7 @@ const authMiddleware = require('../middlewares/authmiddleware');
 
 router.get('/', authMiddleware, (req, res) => {
 	db.query(
-		`SELECT i.quantity, i.unit_price, i.status, p.id, p.name, o.created_at, o.buyer_id
+		`SELECT i.quantity, i.unit_price, i.status, i.paid_at, i.shipped_at, i.delivered_at, i.cancelled_at, p.id, p.name, o.created_at, o.buyer_id
 		FROM order_items i
 		JOIN products p ON p.id = i.product_id
 		JOIN orders o ON o.id = i.order_id

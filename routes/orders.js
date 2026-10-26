@@ -5,7 +5,7 @@ const authMiddleware = require('../middlewares/authmiddleware');
 
 router.get('/', authMiddleware, (req, res) => {
     db.query(
-        `SELECT o.id, o.total, o.created_at, SUM(i.quantity) AS quantity, GROUP_CONCAT(p.name SEPARATOR ', ') AS products
+        `SELECT o.id, o.total, o.status, o.paid_at, o.completed_at, o.cancelled_at, o.created_at, SUM(i.quantity) AS quantity, GROUP_CONCAT(p.name SEPARATOR ', ') AS products
         FROM orders o
         JOIN order_items i ON o.id = i.order_id
         JOIN products p ON p.id = i.product_id
@@ -25,7 +25,7 @@ router.get('/', authMiddleware, (req, res) => {
 router.get('/:id', authMiddleware, (req, res) => {
     const {id} = req.params;
     db.query(
-        `SELECT p.id, p.seller_id, p.name, i.quantity, i.unit_price, i.status,
+        `SELECT p.id, p.seller_id, p.name, i.quantity, i.unit_price, i.status, i.paid_at, i.shipped_at, i.delivered_at, i.cancelled_at,
             (SELECT image_url
             FROM product_images pi
             WHERE pi.product_id = p.id AND pi.order_number = 1) AS image_url
