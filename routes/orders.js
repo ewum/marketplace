@@ -25,12 +25,15 @@ router.get('/', authMiddleware, (req, res) => {
 router.get('/:id', authMiddleware, (req, res) => {
     const {id} = req.params;
     db.query(
-        `SELECT p.id, p.seller_id, p.name, p.image_url, i.quantity, i.unit_price, i.status
+        `SELECT p.id, p.seller_id, p.name, i.quantity, i.unit_price, i.status,
+            (SELECT image_url
+            FROM product_images pi
+            WHERE pi.product_id = p.id AND pi.order_number = 1) AS image_url
         FROM order_items i
         JOIN products p ON i.product_id = p.id
         JOIN orders o ON o.id = i.order_id
         WHERE o.id = ? AND o.buyer_id = ?`,
-        [req.user.id],
+        [id, req.user.id],
         (err, results) => {
             if (err) {
                 console.error(err);
