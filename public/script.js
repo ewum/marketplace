@@ -138,7 +138,6 @@ async function loadProduct(id) {
             `).join('')}    
         `;
     } catch (err) {
-        console.log(err);
         div.innerHTML = '<p>failed to load product</p>';    
     }
 }
