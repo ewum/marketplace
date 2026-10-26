@@ -74,6 +74,10 @@ CREATE TABLE order_items (
     shipping DECIMAL(10, 2) NOT NULL,
     unit_price DECIMAL(10, 2) NOT NULL,
     status ENUM('pending', 'paid', 'shipped', 'delivered', 'cancelled') DEFAULT 'pending' NOT NULL,
+    paid_at TIMESTAMP DEFAULT NULL,
+    shipped_at TIMESTAMP DEFAULT NULL,
+    delivered_at TIMESTAMP DEFAULT NULL,
+    cancelled_at TIMESTAMP DEFAULT NULL,
     FOREIGN KEY (product_id) REFERENCES products(id),
     FOREIGN KEY (order_id) REFERENCES orders(id)
 );
