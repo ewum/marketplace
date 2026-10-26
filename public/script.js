@@ -113,7 +113,10 @@ async function loadProduct(id) {
         const productRes = await fetch('/api/products/' + id);
         const questionsRes = await fetch('/api/questions/' + id);
 
-        if (!productRes) throw new Error('failed to fetch products');
+        if (!productRes.ok) {
+            const {error} = await productRes.json();
+            throw new Error(error);
+        }
 
         const product = await productRes.json();
         const questions = await questionsRes.json();
@@ -134,8 +137,8 @@ async function loadProduct(id) {
                 <p class='answered_at'>${question.answered_at}</p>
             `).join('')}    
         `;
-    } catch (error) {
-        console.log(error);
+    } catch (err) {
+        console.log(err);
         div.innerHTML = '<p>failed to load product</p>';    
     }
 }
