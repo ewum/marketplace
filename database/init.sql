@@ -63,6 +63,10 @@ CREATE TABLE orders (
     id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
     buyer_id INT NOT NULL,
     total DECIMAL(10, 2) NOT NULL,
+    status ENUM('pending', 'paid', 'completed', 'cancelled') DEFAULT 'pending' NOT NULL,
+    paid_at TIMESTAMP DEFAULT NULL,
+    completed_at TIMESTAMP DEFAULT NULL,
+    cancelled_at TIMESTAMP DEFAULT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP(),
 );
 
