@@ -1,5 +1,5 @@
 const express = require('express');
-const authMiddleware = require('../middlewares/authMiddleware');
+const authMiddleware = require('../middlewares/authmiddleware');
 const db = require('../db');
 const multer = require('multer');
 const upload = multer({dest: 'public/uploads'});
@@ -26,7 +26,7 @@ router.patch('/:id', authMiddleware, upload.array('images'), (req, res) => {
 	const {country, state, city, image_url} = req.body;
 	const {id} = req.params;
 	if (Number(id) !== req.user.id) {
-		return res.status(403).json({error: 'unallowed action'});
+		return res.status(403).json({error: 'forbidden'});
 	}
 	db.query(
 		`UPDATE users
@@ -46,7 +46,7 @@ router.patch('/:id', authMiddleware, upload.array('images'), (req, res) => {
 router.delete('/:id', authMiddleware, (req, res) => {
 	const {id} = req.params;
 	if (Number(id) !== req.user.id) {
-		return res.status(403).json({error: 'unallowed action'});
+		return res.status(403).json({error: 'forbidden'});
 	}
 	db.query(
 		`SELECT 1 FROM orders o
@@ -74,6 +74,6 @@ router.delete('/:id', authMiddleware, (req, res) => {
 			res.status(204).json({error: 'successfully deleted your account'});
 		}
 	);
-})l
+});
 
 module.exports = router;
