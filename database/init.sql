@@ -67,7 +67,7 @@ CREATE TABLE orders (
     paid_at TIMESTAMP DEFAULT NULL,
     completed_at TIMESTAMP DEFAULT NULL,
     cancelled_at TIMESTAMP DEFAULT NULL,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP(),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP()
 );
 
 CREATE TABLE order_items (
