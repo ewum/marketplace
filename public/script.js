@@ -128,6 +128,7 @@ async function loadProduct(id) {
             <p class='stock'>${product.stock}</p>
             <p class='created_at'>${product.created_at}</p>
             <a class='seller' href='/users/${product.seller_id}' data-link>${product.seller_name}</a>
+            <button type='button' class='add-to-cart' data-product-id=${product.id}>add to cart</button>
             <h2 class='questions'>questions</h2>
             ${questions.length === 0 ? '<p> there are no questions yet </p>' : questions.map(question => `
                 <a class='asker' href='/users/${question.asker_id}' data-link>${question.asker_name}</a>
